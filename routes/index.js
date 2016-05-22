@@ -24,6 +24,10 @@ function GpioOut(pinNumber) {
     on: (cb) => {
       console.log('lets call gpio.write on ' + pinNumber);
       gpio.write(pinNumber, true, cb);
+    },
+    off: (cb) => {
+      console.log('lets call gpio.write on ' + pinNumber);
+      gpio.write(pinNumber, false, cb);
     }
   }
 }
@@ -33,15 +37,26 @@ function GpioOut(pinNumber) {
 // gpio.setup(8, gpio.DIR_OUT, write);
 // gpio.setup(9, gpio.DIR_OUT, write);
  
- GpioOut7 = GpioOut(7);
+var GpioOut7 = GpioOut(7);
+var GpioOut11 = GpioOut(11);
 
-
-
-router.get('/write7', function(req, res, next) {
-  console.log('router get')
-   GpioOut7.on(() => res.json({'written' : GpioOut7.getPinNumber()}));
-   
-  //res.render('index', { title: 'Express' });
+router.get('/left', function(req, res, next) {
+  console.log('turn left');
+//TODO add async  
+GpioOut7.on(() => res.json({'written' : GpioOut7.getPinNumber()}));
+GpioOut11.off();
 });
 
+router.get('/right', function(req, res, next) {
+  console.log('turn right');
+//TODO add async
+GpioOut7.off(() => res.json({'written' : GpioOut7.getPinNumber()}));
+GpioOut11.on();
+});
+
+router.get('/off', function(req, res, next) {
+  console.log('router get off')
+   GpioOut7.off(() => res.json({'written off' : GpioOut7.getPinNumber()}));
+  GpioOut11.off();
+});
 module.exports = router;
