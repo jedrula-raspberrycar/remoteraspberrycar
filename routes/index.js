@@ -21,7 +21,10 @@ function GpioOut(pinNumber) {
   gpio.setup(pinNumber, gpio.DIR_OUT, () => console.log('set up on ' + pinNumber));
   return {
     getPinNumber: () => pinNumber,
-    on: (cb) => gpio.write(pinNumber, true, cb) 
+    on: (cb) => {
+      console.log('lets call gpio.write on ' + pinNumber);
+      gpio.write(pinNumber, true, cb);
+    }
   }
 }
 
