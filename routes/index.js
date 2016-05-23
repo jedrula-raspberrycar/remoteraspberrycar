@@ -71,11 +71,23 @@ function Wheel(gpiout1, gpiout2) {
   }
 }
 
-var wheel1 = Wheel(GpioOut7,GpioOut11);
 
-router.get('/wheel1/left', function(req, res, next) {
-  console.log('turn wheel1 left');
-  wheel1.left(() => res.json({'turned wheel1 left' : wheel1.getGpiosStr()}))
+const wheels = {
+  one: Wheel(GpioOut7,GpioOut11)
+}
+
+router.get('/wheel/:key/:command', function(req, res, next) {
+  const key = req.params.key;
+  const command = req.params.command;
+  const logAction = `hit wheel ${key} with command ${command} `;
+  console.log('lets try to ' + logAction);
+  try {
+    const wheel = wheels[key];
+    wheel[command](() => res.json({'ok ' :  logAction + wheel.getGpiosStr()}));
+  }
+  catch(e) {
+    res.status(500).json({error: `probably wrong command ${command} sent or wheel with key ${key} does not exist`});
+  }  
 });
 
 router.get('/left', function(req, res, next) {
