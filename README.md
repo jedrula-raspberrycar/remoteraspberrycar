@@ -1,5 +1,24 @@
 Project for remote controlling a raspberry pi car
 
+what you need:
+
+1. raspberry pi
+2. wifi dongle
+3. a 3 wheel ( two engines run from some sort of battery) car, see: https://github.com/jedrula/remoteraspberrycar/blob/master/car_image.jpg 
+4. power bank for raspberry
+
+setup:
+
+1. setup wifi dongle: https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md
+2. install nodejs and npm #TODO provide a link
+3. install git #TODO provide a link
+4. git clone https://github.com/jedrula/remoteraspberrycar.git
+5. cd remoteraspberrycar
+6. npm install
+7. npm start
+8. ifconfig - read ip of your raspberry
+9. use an app/browser to send commands to the app, example request to make the car do sth would be sth like 192.168.0.135:3000/forward #TODO WIP
+
 to start the app on raspberry pi:
 
 1. connect raspberry to the carger and to the ethernet cable
