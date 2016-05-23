@@ -1,12 +1,16 @@
 var express = require('express');
+var async = require('async');
 var router = express.Router();
 var gpio;
 try {
- gpio = require('rpi-gpio'); 
+  gpio = require('rpi-gpio'); 
+  gpio.on('change', function(channel, value) {
+    console.log('Channel ' + channel + ' value is now ' + value);
+  });
 }
 catch(err) {
- console.warn('gpio require failed, creating stub for os not supporting rpi-gpio');
- gpio = {
+  console.warn('gpio require failed, creating stub for os not supporting rpi-gpio');
+  gpio = {
   write(pinNumber, value, cb) {
     console.log(`would normally write ${value} to ${pinNumber}`);
     setTimeout(cb, 1000);
@@ -17,9 +21,7 @@ catch(err) {
  }
 }
 
-gpio.on('change', function(channel, value) {
-	console.log('Channel ' + channel + ' value is now ' + value);
-});
+
 
 function GpioOut(pinNumber) {
   gpio.setup(pinNumber, gpio.DIR_OUT, () => console.log('set up on ' + pinNumber));
@@ -38,8 +40,8 @@ function GpioOut(pinNumber) {
 
 function closePins(cb) {
     gpio.destroy(function() {
-        console.log('All pins closed/destroyed');
-	cb();
+      console.log('All pins closed/destroyed');
+	    cb();
     });
 }
  
@@ -53,6 +55,28 @@ function gracefulExit() {
  
 var GpioOut7 = GpioOut(7);
 var GpioOut11 = GpioOut(11);
+
+function Wheel(gpiout1, gpiout2) {
+  return {
+    left(cb) {
+      async.parallel([gpiout1.on, gpiout2.off], cb);
+    },
+    right(cb) {
+      async.parallel([gpiout1.off, gpiout2.on], cb);
+    },
+    stop(cb) {
+      async.parallel([gpiout1.off, gpiout2.off], cb);
+    },
+    getGpiosStr: () => gpiout1.getPinNumber() + ":" + gpiout2.getPinNumber()
+  }
+}
+
+var wheel1 = Wheel(GpioOut7,GpioOut11);
+
+router.get('/wheel1/left', function(req, res, next) {
+  console.log('turn wheel1 left');
+  wheel1.left(() => res.json({'turned wheel1 left' : wheel1.getGpiosStr()}))
+});
 
 router.get('/left', function(req, res, next) {
   console.log('turn left');
