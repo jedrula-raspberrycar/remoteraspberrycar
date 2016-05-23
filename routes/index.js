@@ -17,6 +17,10 @@ catch(err) {
  }
 }
 
+gpio.on('change', function(channel, value) {
+	console.log('Channel ' + channel + ' value is now ' + value);
+});
+
 function GpioOut(pinNumber) {
   gpio.setup(pinNumber, gpio.DIR_OUT, () => console.log('set up on ' + pinNumber));
   return {
@@ -32,19 +36,29 @@ function GpioOut(pinNumber) {
   }
 }
 
+function closePins(cb) {
+    gpio.destroy(function() {
+        console.log('All pins closed/destroyed');
+	cb();
+    });
+}
  
-// gpio.setup(7, gpio.DIR_OUT, write);
-// gpio.setup(8, gpio.DIR_OUT, write);
-// gpio.setup(9, gpio.DIR_OUT, write);
+process.on('SIGTERM', gracefulExit); 
+process.on('SIGINT', gracefulExit);
+
+function gracefulExit() {
+  console.log('About to exit.');
+	closePins(process.exit);
+}
  
 var GpioOut7 = GpioOut(7);
 var GpioOut11 = GpioOut(11);
 
 router.get('/left', function(req, res, next) {
   console.log('turn left');
-//TODO add async  
-GpioOut7.on(() => res.json({'written' : GpioOut7.getPinNumber()}));
-GpioOut11.off();
+  //TODO add async  
+  GpioOut7.on(() => res.json({'written' : GpioOut7.getPinNumber()}));
+  GpioOut11.off();
 });
 
 router.get('/right', function(req, res, next) {
