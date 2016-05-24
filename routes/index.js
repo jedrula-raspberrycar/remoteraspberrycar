@@ -55,6 +55,8 @@ function gracefulExit() {
  
 var GpioOut7 = GpioOut(7);
 var GpioOut11 = GpioOut(11);
+var GpioOut13 = GpioOut(13);
+var GpioOut15 = GpioOut(15);
 
 function Wheel(gpiout1, gpiout2) {
   return {
@@ -73,35 +75,59 @@ function Wheel(gpiout1, gpiout2) {
 
 
 const wheels = {
-  one: Wheel(GpioOut7,GpioOut11)
+  one: Wheel(GpioOut7,GpioOut11),
+  two: Wheel(GpioOut13,GpioOut15),
+}
+
+function triggerWheelAction(key, command, cb) {
+  const logAction = `hit wheel ${key} with command ${command} `;
+  console.log('lets try to ' + logAction);
+  try {
+    const wheel = wheels[key];
+    wheel[command](() => cb(null, {'ok ' :  logAction + wheel.getGpiosStr()}));//() => res.json({'ok ' :  logAction + wheel.getGpiosStr()})
+  }
+  catch(e) {
+    cb({error: `probably wrong command ${command} sent or wheel with key ${key} does not exist`});//res.status(500).json({error: `probably wrong command ${command} sent or wheel with key ${key} does not exist`});
+  }
 }
 
 router.get('/wheel/:key/:command', function(req, res, next) {
   const key = req.params.key;
   const command = req.params.command;
-  const logAction = `hit wheel ${key} with command ${command} `;
-  console.log('lets try to ' + logAction);
-  try {
-    const wheel = wheels[key];
-    wheel[command](() => res.json({'ok ' :  logAction + wheel.getGpiosStr()}));
-  }
-  catch(e) {
-    res.status(500).json({error: `probably wrong command ${command} sent or wheel with key ${key} does not exist`});
-  }  
+  triggerWheelAction(key, command, (err, data) => {
+    if(err) {
+      res.status(500).json(err);   
+    }
+    else {
+      res.json(data);
+    }
+  })
+  // const logAction = `hit wheel ${key} with command ${command} `;
+  // console.log('lets try to ' + logAction);
+  // try {
+  //   const wheel = wheels[key];
+  //   wheel[command](() => res.json({'ok ' :  logAction + wheel.getGpiosStr()}));
+  // }
+  // catch(e) {
+  //   res.status(500).json({error: `probably wrong command ${command} sent or wheel with key ${key} does not exist`});
+  // }
 });
 
-router.get('/left', function(req, res, next) {
-  console.log('turn left');
-  //TODO add async  
-  GpioOut7.on(() => res.json({'written' : GpioOut7.getPinNumber()}));
-  GpioOut11.off();
-});
-
-router.get('/right', function(req, res, next) {
-  console.log('turn right');
-//TODO add async
-GpioOut7.off(() => res.json({'written' : GpioOut7.getPinNumber()}));
-GpioOut11.on();
+router.get('/wheels/:command', function(req, res, next) {
+  const command = req.params.command;
+  async.parallel([
+    (cb) => triggerWheelAction('one', command, cb),
+    (cb) => triggerWheelAction('two', command, cb)
+  ], 
+  (err, data) => {
+      console.log('oasijdoaisdj', err, data);
+      if(err) {
+        res.status(500).json(err);   
+      }
+      else {
+        res.json(data);
+      }
+  });
 });
 
 router.get('/off', function(req, res, next) {
