@@ -1,3 +1,11 @@
+var JSONAPIDeserializer = require('jsonapi-serializer').Deserializer;
+var jsonapiDeserializer = new JSONAPIDeserializer();
+
+var JSONAPISerializer = require('jsonapi-serializer').Serializer;
+var WheelSerializer = new JSONAPISerializer('wheels', {
+  attributes: ['status']
+});
+
 var express = require('express');
 var async = require('async');
 var router = express.Router();
@@ -66,7 +74,7 @@ function Wheel(gpiout1, gpiout2) {
     right(cb) {
       async.parallel([gpiout1.off, gpiout2.on], cb);
     },
-    stop(cb) {
+    stopped(cb) {
       async.parallel([gpiout1.off, gpiout2.off], cb);
     },
     getGpiosStr: () => gpiout1.getPinNumber() + ":" + gpiout2.getPinNumber()
@@ -90,37 +98,35 @@ function triggerWheelAction(key, command, cb) {
     cb({error: `probably wrong command ${command} sent or wheel with key ${key} does not exist`});//res.status(500).json({error: `probably wrong command ${command} sent or wheel with key ${key} does not exist`});
   }
 }
-
-router.get('/wheel/:key/:command', function(req, res, next) {
-  const key = req.params.key;
-  const command = req.params.command;
-  triggerWheelAction(key, command, (err, data) => {
+router.patch('/wheels/:id', function(req, res, next) {
+  const id = req.params.id;
+  const status = req.body.data.attributes.status;
+  //console.log('req body', req.body, jsonapiDeserializer.deserialize(req.body));
+  triggerWheelAction(id, status, (err, data) => {
     if(err) {
       res.status(500).json(err);   
     }
     else {
-      res.json(data);
+      res.status(204).send();
     }
   })
-  // const logAction = `hit wheel ${key} with command ${command} `;
-  // console.log('lets try to ' + logAction);
-  // try {
-  //   const wheel = wheels[key];
-  //   wheel[command](() => res.json({'ok ' :  logAction + wheel.getGpiosStr()}));
-  // }
-  // catch(e) {
-  //   res.status(500).json({error: `probably wrong command ${command} sent or wheel with key ${key} does not exist`});
-  // }
 });
 
-router.get('/wheels/:command', function(req, res, next) {
+router.get('/wheels/:id', (req, res, next) => {
+  //TODO read actual status from pinsl
+  var data = WheelSerializer.serialize({id: req.params.id, status: 'stopped'});
+  console.log('hit', req.params.id,req.body, data);
+  res.json(data);
+});
+
+router.post('/wheels/:command', function(req, res, next) {
   const command = req.params.command;
   async.parallel([
     (cb) => triggerWheelAction('one', command, cb),
     (cb) => triggerWheelAction('two', command, cb)
   ], 
   (err, data) => {
-      console.log('oasijdoaisdj', err, data);
+      console.log('/wheels/:command', err, data);
       if(err) {
         res.status(500).json(err);   
       }
@@ -130,7 +136,7 @@ router.get('/wheels/:command', function(req, res, next) {
   });
 });
 
-router.get('/off', function(req, res, next) {
+router.post('/off', function(req, res, next) {
   console.log('router get off')
    GpioOut7.off(() => res.json({'written off' : GpioOut7.getPinNumber()}));
   GpioOut11.off();
