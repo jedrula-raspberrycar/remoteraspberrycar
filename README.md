@@ -33,6 +33,6 @@ to have the node.js program start on raspberry boot:
 2. open crontab using sudo crontab -e
 3. add this line:
   @reboot sudo /usr/local/bin/node path/to/the/repo/ended/with/bin/www &
-4. all done, you can use nodemon instead of node to watch files and auto restart node app. It would also be nice to have the output in a file rather then in the void. However we should have some file size limit not to overload the Pi.
 
-nohup node simple-server.js > output.log &
+all done, you can use nodemon instead of node to watch files and auto restart node app. It would also be nice to have the output in a file rather then in the void. However we should have some file size limit not to overload the Pi.
+
