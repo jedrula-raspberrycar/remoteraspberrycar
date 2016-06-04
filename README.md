@@ -26,3 +26,18 @@ to start the app on raspberry pi:
 3. ssh pi@192.168.0.1 (password raspberry)
 4. cd jedrek/myapp
 5. npm start
+
+to have the node.js program start on raspberry boot:
+
+1. check where your node is by running 'which node', you should get sth like '/usr/local/bin/node'
+2. open crontab using sudo crontab -e
+3. add this line:
+  @reboot sudo /usr/local/bin/node path/to/the/repo/ended/with/bin/www &
+
+all done, you can use nodemon instead of node to watch files and auto restart node app. It would also be nice to have the output in a file rather then in the void. However we should have some file size limit not to overload the Pi.
+
+running client in ember
+1. for controling the car
+  ember serve --environment production
+2. for frontend development with mirage
+  ember serve --environment development
