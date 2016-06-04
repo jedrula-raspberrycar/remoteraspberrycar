@@ -11,7 +11,7 @@ var async = require('async');
 var router = express.Router();
 var gpio;
 try {
-  gpio = require('rpi-gpio'); 
+  gpio = require('rpi-gpio');
   gpio.on('change', function(channel, value) {
     console.log('Channel ' + channel + ' value is now ' + value);
   });
@@ -52,15 +52,15 @@ function closePins(cb) {
 	    cb();
     });
 }
- 
-process.on('SIGTERM', gracefulExit); 
+
+process.on('SIGTERM', gracefulExit);
 process.on('SIGINT', gracefulExit);
 
 function gracefulExit() {
   console.log('About to exit.');
 	closePins(process.exit);
 }
- 
+
 var GpioOut7 = GpioOut(7);
 var GpioOut11 = GpioOut(11);
 var GpioOut13 = GpioOut(13);
@@ -68,10 +68,10 @@ var GpioOut15 = GpioOut(15);
 
 function Wheel(gpiout1, gpiout2) {
   return {
-    left(cb) {
+    forward(cb) {//TODO first turn off both maybe it will help with forward->back or back->forward
       async.parallel([gpiout1.on, gpiout2.off], cb);
     },
-    right(cb) {
+    back(cb) {//TODO first turn off both maybe it will help with forward->back or back->forward
       async.parallel([gpiout1.off, gpiout2.on], cb);
     },
     stopped(cb) {
@@ -104,7 +104,7 @@ router.patch('/wheels/:id', function(req, res, next) {
   //console.log('req body', req.body, jsonapiDeserializer.deserialize(req.body));
   triggerWheelAction(id, status, (err, data) => {
     if(err) {
-      res.status(500).json(err);   
+      res.status(500).json(err);
     }
     else {
       res.status(204).send();
@@ -128,7 +128,7 @@ router.post('/wheels/:command', function(req, res, next) {
   (err, data) => {
       console.log('/wheels/:command', err, data);
       if(err) {
-        res.status(500).json(err);   
+        res.status(500).json(err);
       }
       else {
         res.json(data);
