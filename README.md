@@ -36,3 +36,8 @@ to have the node.js program start on raspberry boot:
 
 all done, you can use nodemon instead of node to watch files and auto restart node app. It would also be nice to have the output in a file rather then in the void. However we should have some file size limit not to overload the Pi.
 
+running client in ember
+1. for controling the car
+  ember serve --environment production
+2. for frontend development with mirage
+  ember serve --environment development
