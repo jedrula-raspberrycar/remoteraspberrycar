@@ -41,3 +41,7 @@ running client in ember
   ember serve --environment production
 2. for frontend development with mirage
   ember serve --environment development
+
+
+Troubleshooting:
+  express gets requests but engine does not respond to command - maybe you are not running node app with sudo
