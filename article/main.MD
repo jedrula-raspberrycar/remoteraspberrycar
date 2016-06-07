@@ -5,20 +5,23 @@ Lets split up our concerns
 1. Toy Car
 
 1.1. Parts:
-  raspberry pi
+  raspberry pi 
   wifi dongle
-  a 3 wheel ( two engines run from some sort of battery) car, see: https://github.com/jedrula/remoteraspberrycar/blob/master/car_image.jpg
-  power bank for raspberry (I used something you normally use for a cell phone)
+  a 3 wheel ( two engines run from some sort of battery) car, see: https://github.com/jedrula/remoteraspberrycar/blob/master/car_image.jpg 
+  power bank for raspberry (I used something you normally use for a cell phone) 
+  l298n motor board module
 
 1.2. Wiring up the car
 1.2.1. "Debugging the engine"
 
 2. Backend
 2.1. Environment setup
-2.1.1 installing system on raspberry pi
-      npm && nodejs
+2.1.1 installing system on raspberry pi 
       setting up wifi
       accessing pi using ssh
+      npm && nodejs
+      installing git
+      
       
       
   
