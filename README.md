@@ -6,6 +6,7 @@ what you need:
 2. wifi dongle
 3. a 3 wheel ( two engines run from some sort of battery) car, see: https://github.com/jedrula/remoteraspberrycar/blob/master/car_image.jpg 
 4. power bank for raspberry
+5. l298n motor control board, see: https://github.com/jedrula/remoteraspberrycar/blob/master/l298n.jpg
 
 setup:
 
