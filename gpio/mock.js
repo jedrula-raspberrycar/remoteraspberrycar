@@ -7,6 +7,6 @@ module.exports = {
     console.log(`would normally setup on ${pinNumber}`);
   },
   destroy() {
-    console.log('destroy gpios');
+    console.log('destroy gitgpios');
   }
 }
