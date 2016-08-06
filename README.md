@@ -30,6 +30,7 @@ to start the app on raspberry pi:
 
 to have the node.js program start on raspberry boot:
 
+TODO: this method seems to be better: about http://www.instructables.com/id/Nodejs-App-As-a-RPI-Service-boot-at-Startup/
 1. check where your node is by running 'which node', you should get sth like '/usr/local/bin/node'
 2. open crontab using sudo crontab -e
 3. add this line:
