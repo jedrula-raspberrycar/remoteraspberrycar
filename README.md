@@ -47,3 +47,6 @@ running client in ember
 
 Troubleshooting:
   express gets requests but engine does not respond to command - maybe you are not running node app with sudo
+
+  fixing-wifi-dropout-issues
+    https://learn.adafruit.com/adafruits-raspberry-pi-lesson-3-network-setup/test-and-configure#fixing-wifi-dropout-issues
