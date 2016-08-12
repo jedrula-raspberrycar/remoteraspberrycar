@@ -1,0 +1,19 @@
+body {
+  padding: 20px;
+  text-align: center;
+
+}
+
+button {
+  display: block;
+  width: 60px;
+  height: 80px;
+}
+
+.wheels {
+  margin: 0 auto;
+  width: 200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

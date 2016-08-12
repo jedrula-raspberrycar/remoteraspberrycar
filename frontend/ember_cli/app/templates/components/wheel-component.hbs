@@ -1,0 +1,27 @@
+{{!-- TODO add action to touchstart and touchmove on the whole wheel and then do
+http://stackoverflow.com/questions/3918842/how-to-find-out-the-actual-event-target-of-touchmove-javascript-event
+http://stackoverflow.com/questions/4780837/is-there-an-equivalent-to-e-pagex-position-for-touchstart-event-as-there-is-fo
+--}}
+<div class="wheel" data-id={{wheel.id}}>
+  <button
+    class="forward {{if wheel.isStatusForward "btn-primary"}}"
+  {{!--   {{action changeStatus 'forward' on='touchMove'}}
+    {{action changeStatus 'forward' on='touchStart'}} --}}
+  >
+    F
+  </button>
+  <button
+    class="stopped {{if wheel.isStatusStopped "btn-primary"}}"
+    {{!-- {{action changeStatus 'stopped' on='touchMove'}}
+    {{action changeStatus 'stopped' on='touchStart'}} --}}
+  >
+    S
+  </button>
+  <button
+    class="back {{if wheel.isStatusBack "btn-primary"}}"
+    {{!-- {{action changeStatus 'back' on='touchMove'}}
+    {{action changeStatus 'back' on='touchStart'}} --}}
+  >
+    B
+  </button>
+</div>
