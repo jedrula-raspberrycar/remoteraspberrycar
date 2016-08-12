@@ -4,7 +4,7 @@ what you need:
 
 1. raspberry pi
 2. wifi dongle
-3. a 3 wheel ( two engines run from some sort of battery) car, see: https://github.com/jedrula/remoteraspberrycar/blob/master/car_image.jpg 
+3. a 3 wheel ( two engines run from some sort of battery) car, see: https://github.com/jedrula/remoteraspberrycar/blob/master/car_image.jpg
 4. power bank for raspberry
 
 setup:
@@ -45,3 +45,6 @@ running client in ember
 
 Troubleshooting:
   express gets requests but engine does not respond to command - maybe you are not running node app with sudo
+
+  to restart raspberry you can try this from ssh:
+  `sudo shutdown -r now`

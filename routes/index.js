@@ -1,12 +1,12 @@
-var JSONAPIDeserializer = require('jsonapi-serializer').Deserializer;
+const JSONAPIDeserializer = require('jsonapi-serializer').Deserializer;
 
-var JSONAPISerializer = require('jsonapi-serializer').Serializer;
-var WheelSerializer = new JSONAPISerializer('wheels', {
+const JSONAPISerializer = require('jsonapi-serializer').Serializer;
+const WheelSerializer = new JSONAPISerializer('wheels', {
   attributes: ['status']
 });
 
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
 const GpioOut = require('../gpio/gpio').GpioOut;
 
@@ -45,7 +45,7 @@ router.patch('/wheels/:id', function(req, res, next) {
 });
 
 router.get('/wheels/:id', (req, res, next) => { //TODO read actual status from pins
-  var data = WheelSerializer.serialize({
+  const data = WheelSerializer.serialize({
     id: req.params.id,
     status: 'stopped'
   });
