@@ -6,6 +6,7 @@ what you need:
 2. wifi dongle
 3. a 3 wheel ( two engines run from some sort of battery) car, see: https://github.com/jedrula/remoteraspberrycar/blob/master/car_image.jpg
 4. power bank for raspberry
+5. l298n motor control board, see: https://github.com/jedrula/remoteraspberrycar/blob/master/l298n.jpg
 
 setup:
 
@@ -23,12 +24,13 @@ to start the app on raspberry pi:
 
 1. connect raspberry to the carger and to the ethernet cable
 2. read ip address of raspberry from your router admin paner, sth like: http://192.168.0.1/dhcp.htm
-3. ssh pi@192.168.0.1 (password raspberry)
+3. ssh pi@192.168.0.1 or pi@192.168.0.150 or something along those lines(password raspberry)
 4. cd jedrek/myapp
 5. npm start
 
 to have the node.js program start on raspberry boot:
 
+TODO: this method seems to be better: about http://www.instructables.com/id/Nodejs-App-As-a-RPI-Service-boot-at-Startup/
 1. check where your node is by running 'which node', you should get sth like '/usr/local/bin/node'
 2. open crontab using sudo crontab -e
 3. add this line:
@@ -48,3 +50,6 @@ Troubleshooting:
 
   to restart raspberry you can try this from ssh:
   `sudo shutdown -r now`
+
+  fixing-wifi-dropout-issues
+    https://learn.adafruit.com/adafruits-raspberry-pi-lesson-3-network-setup/test-and-configure#fixing-wifi-dropout-issues
