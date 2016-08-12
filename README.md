@@ -31,6 +31,7 @@ to start the app on raspberry pi:
 to have the node.js program start on raspberry boot:
 
 TODO: this method seems to be better: about http://www.instructables.com/id/Nodejs-App-As-a-RPI-Service-boot-at-Startup/
+
 1. check where your node is by running 'which node', you should get sth like '/usr/local/bin/node'
 2. open crontab using sudo crontab -e
 3. add this line:
@@ -39,6 +40,7 @@ TODO: this method seems to be better: about http://www.instructables.com/id/Node
 all done, you can use nodemon instead of node to watch files and auto restart node app. It would also be nice to have the output in a file rather then in the void. However we should have some file size limit not to overload the Pi.
 
 running client in ember
+
 1. for controling the car
   ember serve --environment production
 2. for frontend development with mirage
@@ -46,6 +48,7 @@ running client in ember
 
 
 Troubleshooting:
+
   express gets requests but engine does not respond to command - maybe you are not running node app with sudo
 
   to restart raspberry you can try this from ssh:
