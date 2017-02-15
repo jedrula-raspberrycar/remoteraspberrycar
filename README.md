@@ -30,9 +30,12 @@ to setup and start the web client
 
 2. cd frontend/ember_cli
 
-3a. for controling the car
-  ember serve --environment production (TODO this probably won't work as you need to modify the dynamically set host api of your pi)
-3b. for frontend development with mirage
+3. start ember app
+
+  ember serve --environment production (TODO this probably won't work as you need to modify the dynamically set host api of your pi)  
+
+4. for frontend development with mirage
+
   ember serve --environment development
 
 
