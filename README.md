@@ -8,9 +8,9 @@
 what you need:
 
 1. raspberry pi
-2. a 3 wheel ( two engines run from some sort of battery) car, see: https://github.com/jedrula/remoteraspberrycar/blob/master/car_image.jpg
+2. a [3 wheel car](https://github.com/jedrula/remoteraspberrycar/blob/master/car_image.jpg) ( two engines run from some sort of battery)
 3. power bank for raspberry
-4. l298n motor control board, see: https://github.com/jedrula/remoteraspberrycar/blob/master/l298n.jpg
+4. [l298n](https://github.com/jedrula/remoteraspberrycar/blob/master/l298n.jpg) motor control board
 
 to setup and start the app on raspberry pi:
 
