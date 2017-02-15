@@ -1,4 +1,5 @@
 Project for remote controlling a raspberry pi car
+![Built car](/built car.jpg?raw=true "built car")
 
 what you need:
 
