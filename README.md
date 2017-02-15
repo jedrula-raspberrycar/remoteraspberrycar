@@ -54,5 +54,8 @@ Troubleshooting:
   to restart raspberry you can try this from ssh:
   `sudo shutdown -r now`
 
-  fixing-wifi-dropout-issues
+  fixing-wifi-dropout-issues  (last time the first from list below seemed to work for me)  
+  
+    `sudo iw dev wlan0 set power_save off`  [see here](http://qdosmsq.dunbar-it.co.uk/blog/2016/03/does-your-raspberry-pi-3-lose-wifi-connections-after-a-while/)  
+    
     https://learn.adafruit.com/adafruits-raspberry-pi-lesson-3-network-setup/test-and-configure#fixing-wifi-dropout-issues
