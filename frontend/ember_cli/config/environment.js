@@ -47,7 +47,8 @@ module.exports = function(environment) {
 
   if (environment === 'production') {
     // ENV.APP.API_HOST = 'http://192.168.0.150:3000';
-    ENV.APP.API_HOST = 'http://192.168.0.135:3000';
+    // ENV.APP.API_HOST = 'http://192.168.0.135:3000';
+    ENV.APP.API_HOST = 'http://192.168.0.155:3001';
   }
   return ENV;
 };
