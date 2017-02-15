@@ -29,7 +29,7 @@ process.on('SIGINT', gracefulExit);
 
 module.exports = {
   GpioOut(pinNumber) {
-    gpio.setup(pinNumber, gpio.DIR_OUT, () => console.log('set up on ' + pinNumber));
+    gpio.setup(pinNumber, gpio.DIR_OUT, () => console.log('gpio set up on ' + pinNumber));
     return {
       getPinNumber: () => pinNumber,
       on: (cb) => {
