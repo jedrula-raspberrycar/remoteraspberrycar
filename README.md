@@ -3,7 +3,7 @@
 ### Web client: Ember app.
 
 ![Built car](/built car.jpg?raw=true "built car")
-![Web interface](/interface.jpg?raw=true&v=1 "web interface")
+![Web interface](/web interface.jpg?raw=true&v=1 "web interface")
 
 what you need:
 
