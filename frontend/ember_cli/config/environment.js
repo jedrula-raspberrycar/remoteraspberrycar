@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
   var ENV = {
-    modulePrefix: 'ember-quickstart',
+    modulePrefix: 'ember-remoteraspberrycar',
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
@@ -45,10 +45,15 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
   }
 
-  if (environment === 'production') {
+  if (environment === 'lan') {
     // ENV.APP.API_HOST = 'http://192.168.0.150:3000';
     // ENV.APP.API_HOST = 'http://192.168.0.135:3000';
     ENV.APP.API_HOST = 'http://192.168.0.155:3001';
   }
+
+  if (environment === 'internet') {
+    ENV.APP.API_HOST = 'http://78.88.253.196:3001';
+  }
+
   return ENV;
 };
