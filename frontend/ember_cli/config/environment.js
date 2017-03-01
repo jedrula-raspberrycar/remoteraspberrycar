@@ -51,8 +51,19 @@ module.exports = function(environment) {
     ENV.APP.API_HOST = 'http://192.168.0.155:3001';
   }
 
-  if (environment === 'internet') {
-    ENV.APP.API_HOST = 'http://78.88.253.196:3001';
+  if (environment === 'production') {
+    // steps i took to setup a https
+    // 1. created a free domain at freenom
+    // 2. registered the domain in cloudfare
+    // 3. changed the nameservers in freenom from freenom's to cloudfare's
+    // 4. waited and waited... lets see if it worked
+    // ... maybe https will need to be added to nodejs?
+
+    // I am trying to start with somthing like client -> cloudfare server -> raspberry
+    // ENV.APP.API_HOST = 'https://78.88.255.144:3001';
+    // https://www.cloudflare.com/a/crypto/raspberrycar.tk
+    // https://my.freenom.com/clientarea.php?managedns=raspberrycar.tk&domainid=1025525855
+    ENV.APP.API_HOST = 'https://www.raspberrycar.tk:3001';
   }
 
   return ENV;
