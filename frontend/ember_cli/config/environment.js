@@ -63,7 +63,7 @@ module.exports = function(environment) {
     // ENV.APP.API_HOST = 'https://78.88.255.144:3001';
     // https://www.cloudflare.com/a/crypto/raspberrycar.tk
     // https://my.freenom.com/clientarea.php?managedns=raspberrycar.tk&domainid=1025525855
-    ENV.APP.API_HOST = 'https://www.raspberrycar.tk:3001';
+    ENV.APP.API_HOST = 'https://raspberrycar.tk:3001';
   }
 
   return ENV;
