@@ -6,8 +6,7 @@
 
 var app = require('../app');
 var debug = require('debug')('myapp:server');
-// var http = require('http');
-var https = require('https');
+var http = require('http');
 const fs = require('fs');
 
 /**
@@ -21,13 +20,7 @@ app.set('port', port);
  * Create HTTP server.
  */
 
-// var server = http.createServer(app);
-//https://docs.nodejitsu.com/articles/HTTP/servers/how-to-create-a-HTTPS-server/
-const options = {
-  key: fs.readFileSync(__dirname + '/../ssl/key'),
-  cert: fs.readFileSync(__dirname + '/../ssl/cert')
-};
-var server = https.createServer(options, app);
+var server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
