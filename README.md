@@ -14,7 +14,7 @@ what you need:
 
 to setup and start the app on raspberry pi:
 
-1. connect raspberry to the carger and to the ethernet cable
+1. connect raspberry to the charger and to the ethernet cable (or to wlan - best just connect keyboard and external monitor and choose your wifi name and type password)
 2. read ip address of raspberry from your router admin paner, sth like: http://192.168.0.1/dhcp.htm
 3. ssh pi@192.168.0.1 or pi@192.168.0.150 or something along those lines(password raspberry)
 4. install nodejs and npm #TODO provide a link
