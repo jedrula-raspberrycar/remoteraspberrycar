@@ -2,8 +2,9 @@
 ### Brains of the Pi: nodejs
 ### Web client: Ember app.
 
-![Built car](/built car.jpg?raw=true "built car")
-![Web interface](/web interface.jpg?raw=true&v=1 "web interface")
+![Built car](https://github.com/jedrula-raspberrycar/remoteraspberrycar/blob/master/built%20car.jpg "built car")
+
+![Web interface](https://github.com/jedrula-raspberrycar/remoteraspberrycar/blob/master/web%20interface.jpg "web interface")
 
 what you need:
 
