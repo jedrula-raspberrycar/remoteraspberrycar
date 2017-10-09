@@ -2,8 +2,9 @@
 ### Brains of the Pi: nodejs
 ### Web client: Ember app.
 
-![Built car](/built car.jpg?raw=true "built car")
-![Web interface](/web interface.jpg?raw=true&v=1 "web interface")
+![Built car](https://github.com/jedrula-raspberrycar/remoteraspberrycar/blob/master/built%20car.jpg "built car")
+
+![Web interface](https://github.com/jedrula-raspberrycar/remoteraspberrycar/blob/master/web%20interface.jpg "web interface")
 
 what you need:
 
@@ -14,7 +15,7 @@ what you need:
 
 to setup and start the app on raspberry pi:
 
-1. connect raspberry to the carger and to the ethernet cable
+1. connect raspberry to the charger and to the ethernet cable (or to wlan - best just connect keyboard and external monitor and choose your wifi name and type password)
 2. read ip address of raspberry from your router admin paner, sth like: http://192.168.0.1/dhcp.htm
 3. ssh pi@192.168.0.1 or pi@192.168.0.150 or something along those lines(password raspberry)
 4. install nodejs and npm #TODO provide a link
