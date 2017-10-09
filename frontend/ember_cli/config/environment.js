@@ -48,7 +48,8 @@ module.exports = function(environment) {
   if (environment === 'lan') {
     // ENV.APP.API_HOST = 'http://192.168.0.150:3000';
     // ENV.APP.API_HOST = 'http://192.168.0.135:3000';
-    ENV.APP.API_HOST = 'http://192.168.0.155:3001';
+    // TODO make this smarter! read qr code and determine dynamicaly ?
+    ENV.APP.API_HOST = 'http://raspberrypi.local:3001';
   }
 
   if (environment === 'production') {
