@@ -1,3 +1,8 @@
+// process.on('uncaughtException', function(err) {
+//   console.log('Caught exception: ' + err);
+//   console.log(err.stack);
+// });
+
 var express = require('express');
 var cors = require('cors');
 var path = require('path');
@@ -10,6 +15,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+const wss = require('express-ws')(app);
 app.use(cors());
 
 // view engine setup
@@ -26,6 +32,28 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+
+app.ws('/video-stream', (ws, req) => {
+    const clientCount = wss.getWss().clients.size;
+    console.log('Client connected, nr: ', clientCount);
+
+    ws.send(JSON.stringify({
+      action: 'init',
+      width: '960',
+      height: '540'
+    }));
+
+    const videoStream = raspividStream(/* { rotation: 180 } */);
+
+    videoStream.on('data', (data) => {
+        ws.send(data, { binary: true }, (error) => { if (error) console.error(error); });
+    });
+
+    ws.on('close', () => {
+        console.log('Client left');
+        videoStream.removeAllListeners('data');
+    });
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
