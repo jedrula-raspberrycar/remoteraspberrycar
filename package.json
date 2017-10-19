@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "sudo nodemon ./bin/www",
-    "start": "node ./bin/www"
+    "start": "sudo node ./bin/www"
   },
   "dependencies": {
+    "raspivid-stream": "^0.2.1",
     "async": "^1.5.2",
     "body-parser": "~1.13.2",
     "cookie-parser": "~1.3.5",

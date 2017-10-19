@@ -5,9 +5,6 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('myapp:server');
-var http = require('http');
-const fs = require('fs');
 
 /**
  * Get port from environment and store in Express.
@@ -16,19 +13,15 @@ const fs = require('fs');
 var port = normalizePort(process.env.PORT || '80');
 app.set('port', port);
 
-/**
- * Create HTTP server.
- */
-
-var server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port,"0.0.0.0");
-server.on('error', onError);
-server.on('listening', onListening);
+app.listen(port, '0.0.0.0', () => {
+  console.log(`listening on ${port}`);
+});
+// server.on('error', onError);
 
 /**
  * Normalize a port into a number, string, or false.
@@ -76,16 +69,4 @@ function onError(error) {
     default:
       throw error;
   }
-}
-
-/**
- * Event listener for HTTP server "listening" event.
- */
-
-function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  console.log('Listening on ' + bind);
 }
