@@ -53,7 +53,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.APP.API_HOST = 'https://4de93a31a4324b5dfa4e5e7881681c56.resindevice.io';
+    ENV.APP.API_HOST = 'http://4de93a31a4324b5dfa4e5e7881681c56.resindevice.io';
   }
 
   return ENV;

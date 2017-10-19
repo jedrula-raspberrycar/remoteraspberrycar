@@ -34,7 +34,6 @@ app.ws('/video-stream', (ws, req) => {
 
     ws.on('close', () => {
         console.log('Client left');
-        updateLeds();
         videoStream.removeAllListeners('data');
     });
 });
