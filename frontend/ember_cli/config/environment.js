@@ -25,7 +25,7 @@ module.exports = function(environment) {
       enabled: false
     }
     // ENV.APP.API_HOST = 'http://localhost:3000';
-    ENV.APP.API_HOST = 'http://192.168.0.125:3000';
+    ENV.APP.API_HOST = 'http://192.168.1.102:80';
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
