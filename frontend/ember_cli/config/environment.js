@@ -48,11 +48,12 @@ module.exports = function(environment) {
   if (environment === 'lan') {
     // ENV.APP.API_HOST = 'http://192.168.0.150:3000';
     // ENV.APP.API_HOST = 'http://192.168.0.135:3000';
-    ENV.APP.API_HOST = 'http://192.168.0.155:3001';
+    // TODO make this smarter! read qr code and determine dynamicaly ?
+    ENV.APP.API_HOST = 'http://raspberrypi.local:3001';
   }
 
   if (environment === 'production') {
-    ENV.APP.API_HOST = 'http://78.88.254.231:3001';
+    ENV.APP.API_HOST = 'https://4de93a31a4324b5dfa4e5e7881681c56.resindevice.io';
   }
 
   return ENV;

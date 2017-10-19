@@ -1,5 +1,3 @@
-const JSONAPIDeserializer = require('jsonapi-serializer').Deserializer;
-
 const JSONAPISerializer = require('jsonapi-serializer').Serializer;
 const WheelSerializer = new JSONAPISerializer('wheels', {
   attributes: ['status']

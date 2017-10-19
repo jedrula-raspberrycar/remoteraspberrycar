@@ -7,6 +7,7 @@ try {
   });
 }
 catch(err) {
+  // TODO would be better of with some environment flag, no ?
   console.warn('gpio require failed, creating stub for os not supporting rpi-gpio');
   gpio = require('../gpio/mock');
 }
