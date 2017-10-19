@@ -4,6 +4,11 @@ const raspividStream = require('raspivid-stream');
 const app = express();
 const wss = require('express-ws')(app);
 
+const routes = require('./routes/index');
+const users = require('./routes/users');
+
+app.use('/', routes);
+app.use('/users', users);
 
 app.ws('/video-stream', (ws, req) => {
     console.log('Client connected');
