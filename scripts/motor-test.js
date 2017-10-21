@@ -1,7 +1,7 @@
 const async = require('async');
 const GpioOut = require('../gpio/gpio').GpioOut;
-const one = GpioOut(7 || process.env.PIN1);
-const two = GpioOut(11 || process.env.PIN2);
+const one = GpioOut(13 || process.env.PIN1);
+const two = GpioOut(15 || process.env.PIN2);
 
 const waitOneSec = cb => setTimeout(cb, 1000);
 
