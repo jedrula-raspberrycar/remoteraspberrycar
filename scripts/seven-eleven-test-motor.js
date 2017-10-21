@@ -7,13 +7,13 @@ const waitOneSec = cb => setTimeout(cb, 1000);
 
 setTimeout(() => {
   console.log('seting off');
-  async.waterfall([
-    cb => async.parallell(one.off, two.off, cb),
+  async.series([
+    cb => async.parallel([one.off, two.off], cb),
     waitOneSec,
-    cb => async.parallell(one.on, two.off, cb),
+    cb => async.parallel([one.on, two.off], cb),
     waitOneSec,
-    cb => async.parallell(one.off, two.on, cb),
+    cb => async.parallel([one.off, two.on], cb),
     waitOneSec,
-    cb => async.parallell(one.off, two.off, cb),
+    cb => async.parallel([one.off, two.off], cb),
   ]);
 }, 1000);
