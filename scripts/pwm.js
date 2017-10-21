@@ -3,8 +3,11 @@ const PWM = require('../gpio/pwm').PWM;
 const one = PWM(13 || process.env.PIN1);
 const two = PWM(15 || process.env.PIN2);
 
-/*
+
 const waitOneSec = cb => setTimeout(cb, 1000);
+
+/*
+
 
 setTimeout(() => {
   console.log('pwm script');
@@ -47,9 +50,9 @@ function increaseSpeed(speed, pin, cb) {
 setTimeout(() => {
   console.log('pwm script');
   async.series([
-    cb => { speedUp(one, two, cb) },
+    cb => { speedUp(one, two, cb); },
     waitOneSec,
-    cb => { speedUp(two, one, cb) },
+    cb => { speedUp(two, one, cb); },
     waitOneSec,
   ]);
 }, 1000);
