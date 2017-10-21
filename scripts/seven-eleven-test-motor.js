@@ -12,6 +12,8 @@ setTimeout(() => {
     waitOneSec,
     cb => async.parallel([one.on, two.off], cb),
     waitOneSec,
+    cb => async.parallel([one.off, two.off], cb),
+    waitOneSec,
     cb => async.parallel([one.off, two.on], cb),
     waitOneSec,
     cb => async.parallel([one.off, two.off], cb),
