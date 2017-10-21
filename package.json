@@ -31,7 +31,7 @@
     "express-ws": "^3.0.0",
     "jsonapi-serializer": "^3.5.5",
     "raspi": "^5.0.1",
-    "raspi-pwm": "^5.0.0",
+    "raspi-soft-pwm": "^4.0.1",
     "raspivid-stream": "^0.2.1-beta",
     "rpi-gpio": "^0.9.1"
   }

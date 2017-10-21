@@ -1,13 +1,13 @@
 // http://wiringpi.com/pins/
 const raspi = require('raspi');
-const pwm = require('raspi-pwm');
+const pwm = require('raspi-soft-pwm');
 
 module.exports = {
   PWM(pinNumber) {
     // TODO not most robust ! improve when more time
     let pwmPin;
     raspi.init(() => {
-      pwmPin = new pwm.PWM(`P1-${pinNumber}`);
+      pwmPin = new pwm.SoftPWM(`P1-${pinNumber}`);
     });
 
     return {
