@@ -1,4 +1,4 @@
-var gpio;
+let gpio;
 
 try {
   gpio = require('rpi-gpio');
@@ -34,11 +34,11 @@ module.exports = {
     return {
       getPinNumber: () => pinNumber,
       on: (cb) => {
-        console.log('lets call gpio.write on ' + pinNumber);
+        console.log('lets gpio.write true on ' + pinNumber);
         gpio.write(pinNumber, true, cb);
       },
       off: (cb) => {
-        console.log('lets call gpio.write on ' + pinNumber);
+        console.log('lets gpio.write false on ' + pinNumber);
         gpio.write(pinNumber, false, cb);
       }
     }
