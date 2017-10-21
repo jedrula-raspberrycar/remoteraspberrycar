@@ -36,13 +36,13 @@ function speedUp(first, second, cb) {
 
 
 function increaseSpeed(speed, pin, cb) {
-  if (speed >= 1) {
+  const newSpeed = speed + 0.05;
+  if (newSpeed >= 1) {
       pin.off();
       cb();
     } else {
-      const newSpeed = speed + 0.05;
       pin.write(newSpeed);
-      setTimeout(() => increaseSpeed(newSpeed, pin), 200);
+      setTimeout(() => increaseSpeed(newSpeed, pin), 600);
     }
 }
 
