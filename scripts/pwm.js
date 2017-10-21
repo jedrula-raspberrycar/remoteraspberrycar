@@ -10,7 +10,7 @@ setTimeout(() => {
   async.series([
     cb => { one.off(); two.off(); cb(); },
     waitOneSec,
-    cb => { one.on(); two.off(); cb(); }
+    cb => { one.on(); two.off(); cb(); },
     waitOneSec,
     cb => { one.off(); two.off(); cb(); },
     waitOneSec,
