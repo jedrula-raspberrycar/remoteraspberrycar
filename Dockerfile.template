@@ -4,6 +4,8 @@
 # Note the node:slim image doesn't have node-gyp
 FROM resin/%%RESIN_MACHINE_NAME%%-node
 
+RUN apt-get update && apt-get install -yq libraspberrypi-bin
+
 # use apt-get if you need to install dependencies,
 # for instance if you need ALSA sound utils, just uncomment the lines below.
 #RUN apt-get update && apt-get install -yq \
