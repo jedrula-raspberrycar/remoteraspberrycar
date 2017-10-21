@@ -42,7 +42,7 @@ function increaseSpeed(speed, pin, cb) {
       cb();
     } else {
       pin.write(newSpeed);
-      setTimeout(() => increaseSpeed(newSpeed, pin), 600);
+      setTimeout(() => increaseSpeed(newSpeed, pin, cb), 600);
     }
 }
 
