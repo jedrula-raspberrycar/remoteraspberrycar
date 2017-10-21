@@ -19,7 +19,7 @@ module.exports = {
       off() {
         console.log('lets gpio.write false on ' + pinNumber);
         pwm.write(0);
-      }
+      },
       write(dutyCycle) {
         pwm.write(dutyCycle);
       }
