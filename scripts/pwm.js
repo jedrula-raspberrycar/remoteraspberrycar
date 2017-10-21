@@ -24,9 +24,6 @@ setTimeout(() => {
 
 
 
-two.off();
-one.write(0.1);
-
 function speedUp(first, second, cb) {
   first.off();
   second.off();
