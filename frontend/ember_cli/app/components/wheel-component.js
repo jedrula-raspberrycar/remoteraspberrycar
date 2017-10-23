@@ -6,16 +6,17 @@ export default Ember.Component.extend({
     this.set('forwardKeyState', 'keyup');
     this.set('backKeyState', 'keyup');
     Ember.$(document).on('keyup keydown', null, (event) => {
-      const prevStatus = this.get('status');  //TODO move to adapter ?
+      const prevspeed = this.get('speed');  //TODO move to adapter ?
+      console.log(prevspeed);
       if(event.keyCode === this.get('forwardKey')) {
         this.set('forwardKeyState', event.type);
       }
       else if(event.keyCode === this.get('backKey')) {
         this.set('backKeyState', event.type);
       }
-      const curStatus = this.get('status');
-      if(prevStatus !== curStatus) {
-        this.get('changeStatus')(curStatus);
+      const curspeed = this.get('speed');
+      if(prevspeed !== curspeed) {
+        this.get('changeSpeed')(curspeed);
       }
     });
   },
@@ -40,7 +41,7 @@ export default Ember.Component.extend({
     obj.preventDefault();
     const { pageY } = obj.originalEvent.targetTouches[0];
     
-    const prevStatus = this.get('status');
+    const prevspeed = this.get('speed');
     const position = this.getTouchPosition(pageY);
     if(position == 'top') {
       this.set('forwardKeyState', 'keydown');
@@ -51,19 +52,19 @@ export default Ember.Component.extend({
       this.set('backKeyState', 'keyup');
     }
 
-    const curStatus = this.get('status');
-    if(prevStatus !== curStatus) {
-      console.log('changing status to ', curStatus)
-      this.get('changeStatus')(curStatus);
+    const curspeed = this.get('speed');
+    if(prevspeed !== curspeed) {
+      console.log('changing speed to ', curspeed)
+      this.get('changeSpeed')(curspeed);
     }
   },
   touchEnd() {
     this.set('forwardKeyState', 'keyup');
     this.set('backKeyState', 'keyup');
-    const curStatus = this.get('status');
-    this.get('changeStatus')(curStatus);
+    const curspeed = this.get('speed');
+    this.get('changeSpeed')(curspeed);
   },
-  status: Ember.computed('forwardKeyState','backKeyState', function() {
+  speed: Ember.computed('forwardKeyState','backKeyState', function() {
     const forwardKeyState = this.get('forwardKeyState');
     const backKeyState = this.get('backKeyState');
 
@@ -71,7 +72,7 @@ export default Ember.Component.extend({
     const bothDown = this.isDown(forwardKeyState) && this.isDown(backKeyState);
 
     if(bothUp || bothDown) {
-      return 'stopped';
+      return 0;
     } else if(this.isDown(backKeyState)) {
       return "back";
     } else {

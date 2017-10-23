@@ -5,12 +5,12 @@ import attr from 'ember-data/attr';
 const { computed } = Ember;
 
 export default Model.extend({
-  status: attr('string'),
-  saveStatus(newStatus) {
-    this.set('status', newStatus);
+  saveSpeed(newSpeed) {
+    this.set('speed', newSpeed);
     return this.save();
   },
-  isStatusForward: computed.equal('status', 'forward'),
-  isStatusStopped: computed.equal('status', 'stopped'),
-  isStatusBack: computed.equal('status', 'back'),
+  speed: attr('number'),
+  isMovingForward: computed.gt('speed', 0),
+  isWheelStopped: computed.equal('speed', 0),
+  isMovingBack: computed.lt('speed', 0),
 });

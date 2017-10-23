@@ -27,7 +27,7 @@ export default function() {
   this.get('/wheels/:id', (schema, request) => {
     let wheel =  schema.wheels.create({
       id: request.params.id,
-      status: 'stopped'
+      speed: 0
     });
     return wheel;
   });

@@ -1,5 +1,4 @@
 const express = require('express');
-const raspividStream = require('raspivid-stream');
 
 const app = express();
 const cors = require('cors');
@@ -17,6 +16,8 @@ app.use('/', routes);
 app.use('/users', users);
 
 
+/*
+const raspividStream = require('raspivid-stream');
 app.ws('/video-stream', (ws, req) => {
     console.log('Client connected');
 
@@ -37,7 +38,7 @@ app.ws('/video-stream', (ws, req) => {
         videoStream.removeAllListeners('data');
     });
 });
-
+*/
 
 app.use(function (err, req, res, next) {
   console.error(err);

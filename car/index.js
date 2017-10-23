@@ -1,16 +1,16 @@
 var async = require('async');
-function Wheel(gpiout1, gpiout2) {
+function Wheel(pwm1, pwm2) {
   return {
-    forward(cb) {//TODO first turn off both maybe it will help with forward->back or back->forward
-      async.parallel([gpiout1.on, gpiout2.off], cb);
+    changeSpeed(speed) {
+      if (speed > 0) {
+        pwm2.write(0);
+        pwm1.write(speed / 100);
+      } else {
+        pwm1.write(0);
+        pwm2.write((-1 * speed) / 100);
+      }
     },
-    back(cb) {//TODO first turn off both maybe it will help with forward->back or back->forward
-      async.parallel([gpiout1.off, gpiout2.on], cb);
-    },
-    stopped(cb) {
-      async.parallel([gpiout1.off, gpiout2.off], cb);
-    },
-    getGpiosStr: () => gpiout1.getPinNumber() + ":" + gpiout2.getPinNumber()
+    getGpiosStr: () => pwm1.getPinNumber() + ":" + pwm2.getPinNumber() + ":" + speed
   }
 }
 

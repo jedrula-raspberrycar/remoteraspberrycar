@@ -1,14 +1,4 @@
 <div class="wheels">
-{{wheel-component forwardKey=81 backKey=65 wheel=model.wheelone changeStatus=(action 'changeStatus' model.wheelone)}}
-{{wheel-component forwardKey=80 backKey=76 wheel=model.wheeltwo changeStatus=(action 'changeStatus' model.wheeltwo)}}
+{{wheel-component forwardKey=81 backKey=65 wheel=model.wheelone changeSpeed=(action 'changeSpeed' model.wheelone)}}
+{{wheel-component forwardKey=80 backKey=76 wheel=model.wheeltwo changeSpeed=(action 'changeSpeed' model.wheeltwo)}}
 </div>
-
-
-{{!--
-<h1>both</h1>
-<div>
-<button class="btn {{if areAllForward "btn-primary"}}"  {{action 'changeAll' 'forward'}}>forward</button>
-<button class="btn {{if areAllStopped "btn-primary"}}" {{action 'changeAll' 'stopped'}}>stop</button>
-<button class="btn {{if areAllBack "btn-primary"}}" {{action 'changeAll' 'back'}}>back</button>
-</div>
- --}}

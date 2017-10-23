@@ -4,24 +4,24 @@ http://stackoverflow.com/questions/4780837/is-there-an-equivalent-to-e-pagex-pos
 --}}
 <div class="wheel" data-id={{wheel.id}}>
   <button
-    class="forward {{if wheel.isStatusForward "btn-primary"}}"
-  {{!--   {{action changeStatus 'forward' on='touchMove'}}
-    {{action changeStatus 'forward' on='touchStart'}} --}}
+    class="forward {{if wheel.isMovingForward "btn-primary"}}"
+  {{!--   {{action changeSpeed 'forward' on='touchMove'}}
+    {{action changeSpeed 'forward' on='touchStart'}} --}}
   >
-    F
+    F ({{wheel.speed}})
   </button>
   <button
-    class="stopped {{if wheel.isStatusStopped "btn-primary"}}"
-    {{!-- {{action changeStatus 'stopped' on='touchMove'}}
-    {{action changeStatus 'stopped' on='touchStart'}} --}}
+    class="stopped {{if wheel.isWheelStopped "btn-primary"}}"
+    {{!-- {{action changeSpeed 'stopped' on='touchMove'}}
+    {{action changeSpeed 'stopped' on='touchStart'}} --}}
   >
     S
   </button>
   <button
-    class="back {{if wheel.isStatusBack "btn-primary"}}"
-    {{!-- {{action changeStatus 'back' on='touchMove'}}
-    {{action changeStatus 'back' on='touchStart'}} --}}
+    class="back {{if wheel.isMovingBack "btn-primary"}}"
+    {{!-- {{action changeSpeed 'back' on='touchMove'}}
+    {{action changeSpeed 'back' on='touchStart'}} --}}
   >
-    B
+    B ({{wheel.speed}})
   </button>
 </div>
