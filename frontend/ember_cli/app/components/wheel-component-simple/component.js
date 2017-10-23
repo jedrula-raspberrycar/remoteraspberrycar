@@ -3,7 +3,8 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   actions: {
     updateSpeed(wheel, speed) {
-      wheel.saveSpeed(speed);
+      Ember.run.debounce(wheel, "saveSpeed", [speed], 1000);
+      // wheel.saveSpeed(speed);
     }
   }
 });
