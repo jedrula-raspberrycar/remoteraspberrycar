@@ -16,17 +16,71 @@ button {
   margin: 0 auto;
   width: 200px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
+  -webkit-transform: rotate(90deg);
+  margin-top: 60px;
 }
 
+/*
 
-// https://stackoverflow.com/questions/15935837/how-to-display-a-range-input-slider-vertically
 input[type=range]
 {
-    writing-mode: bt-lr; /* IE */
-    -webkit-appearance: slider-vertical; /* WebKit */
+    writing-mode: bt-lr;
+    -webkit-appearance: slider-vertical;
     width: 8px;
     height: 175px;
     padding: 0 5px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 64px;
+    width: 64px;
+    border-radius: 50%;
+    background: goldenrod;
+    margin-top: -4px;
+}
+
+// https://stackoverflow.com/questions/15935837/how-to-display-a-range-input-slider-vertically
+*/
+input[type=range] {
+    /*removes default webkit styles*/
+    -webkit-appearance: none;
+    
+    /*fix for FF unable to apply focus style bug */
+    border: 1px solid white;
+    
+    /*required for proper track sizing in FF*/
+    width: 300px;
+    height: 64px;
+}
+
+
+.wheels div:first-child {
+  margin-bottom: 100px;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 300px;
+    height: 8px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 64px;
+    width: 64px;
+    border-radius: 50%;
+    background: goldenrod;
+    margin-top: -28px;
+}
+input[type=range]:focus {
+    outline: none;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ccc;
 }
