@@ -55,7 +55,8 @@ module.exports = function(environment) {
   if (environment === 'production') {
     // ENV.APP.API_HOST = 'http://4de93a31a4324b5dfa4e5e7881681c56.resindevice.io';
     // ENV.APP.API_HOST = 'https://c88e016b1ddda096c9545e62c8a0a520.resindevice.io';
-    ENV.APP.API_HOST = 'http://c88e016b1ddda096c9545e62c8a0a520.resindevice.io';
+    // ENV.APP.API_HOST = 'http://c88e016b1ddda096c9545e62c8a0a520.resindevice.io';
+    ENV.APP.API_HOST = 'http://jedrula.ddns.net:7002'; // 7002 goes to my NAS and is reversed proxied to .202 pi
   }
 
   return ENV;
