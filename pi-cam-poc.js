@@ -45,7 +45,7 @@ app.use(function (err, req, res, next) {
   next(err);
 })
 
-const port = parseInt(process.env.PORT || 8080);
+const port = 8080; // parseInt(process.env.PORT || 8080);
 
 app.listen(port, '0.0.0.0', () => {
   console.log(`listening on ${port}`);
