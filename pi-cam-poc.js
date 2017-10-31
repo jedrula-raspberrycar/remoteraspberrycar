@@ -47,6 +47,10 @@ app.use(function (err, req, res, next) {
 
 const port = 8080; // parseInt(process.env.PORT || 8080);
 
+app.listen(80, '0.0.0.0', () => {
+  console.log(`listening on 80`);
+});
+
 app.listen(port, '0.0.0.0', () => {
   console.log(`listening on ${port}`);
 });
