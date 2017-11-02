@@ -1,8 +1,11 @@
 const express = require('express');
+const http = require('http');
+const WebSocket = require('ws');
 
 const app = express();
+const server = http.createServer(app);
+const wss = new WebSocket.Server({ server });
 const cors = require('cors');
-const wss = require('express-ws')(app);
 const bodyParser = require('body-parser');
 
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
@@ -14,6 +17,7 @@ const users = require('./routes/users');
 app.use(cors());
 app.use('/', routes);
 app.use('/users', users);
+
 
 
 /*
@@ -45,12 +49,23 @@ app.use(function (err, req, res, next) {
   next(err);
 })
 
-app.listen(80, '0.0.0.0', () => {
-  console.log(`listening on 80`);
+let counter = 0;
+wss.on('connection', function connection(ws, req) {
+  ws.on('message', function incoming(message) {
+    console.log('received: %s', message);
+    ws.send('messageresponse to: ' + message);
+  });
+
+  ws.send('connected');
 });
 
-// const port = 8085; // parseInt(process.env.PORT || 8080);
+app.get('/fetchtest', (req, res) => {
+  res.json({ messageresponse: 'to get request'});
+})
 
-// app.listen(port, '0.0.0.0', () => {
-//   console.log(`listening on ${port}`);
-// });
+
+
+const port = parseInt(process.env.PORT || 80);
+server.listen(port, '0.0.0.0', () => {
+  console.log(`listening on ${server.address().port}`);
+});

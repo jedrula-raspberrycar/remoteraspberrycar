@@ -14,9 +14,10 @@ module.exports = function(environment) {
     },
 
     APP: {
-      //API_HOST: 'http://localhost:3000'
-      // Here you can pass flags/options to your application instance
-      // when it is created
+      API_SERVER_PROTOCOL: 'http',
+      API_WEBSOCKET_PROTOCOL: 'ws',
+      API_DOMAIN: 'localhost',
+      API_PORT: '3000'
     }
   };
 
@@ -24,13 +25,6 @@ module.exports = function(environment) {
     ENV['ember-cli-mirage'] = {
       enabled: false
     }
-    ENV.APP.API_HOST = 'http://localhost:3000';
-    // ENV.APP.API_HOST = 'http://192.168.1.102:80';
-    // ENV.APP.LOG_RESOLVER = true;
-    // ENV.APP.LOG_ACTIVE_GENERATION = true;
-    // ENV.APP.LOG_TRANSITIONS = true;
-    // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
-    // ENV.APP.LOG_VIEW_LOOKUPS = true;
   }
 
   if (environment === 'test') {
@@ -46,18 +40,20 @@ module.exports = function(environment) {
   }
 
   if (environment === 'lan') {
-    // ENV.APP.API_HOST = 'http://192.168.0.150:3000';
-    // ENV.APP.API_HOST = 'http://192.168.0.135:3000';
     // TODO make this smarter! read qr code and determine dynamicaly ?
-    ENV.APP.API_HOST = 'http://raspberrypi.local:3001';
+    ENV.APP.API_DOMAIN = 'raspberrypi.local';
+    ENV.APP.API_PORT = '3001';
   }
 
   if (environment === 'production') {
-    // ENV.APP.API_HOST = 'http://4de93a31a4324b5dfa4e5e7881681c56.resindevice.io';
-    // ENV.APP.API_HOST = 'https://c88e016b1ddda096c9545e62c8a0a520.resindevice.io';
     // ENV.APP.API_HOST = 'http://c88e016b1ddda096c9545e62c8a0a520.resindevice.io';
-    ENV.APP.API_HOST = 'http://jedrula.ddns.net:7002'; // 7002 goes to my NAS and is reversed proxied to .202 pi
+    ENV.APP.API_DOMAIN = 'jedrula.ddns.net';
+    ENV.APP.API_PORT = '7002'; // 7002 goes to my NAS and is reversed proxied to .202 pi
   }
+
+
+  ENV.APP.API_HOST = `${ENV.APP.API_SERVER_PROTOCOL}://${ENV.APP.API_DOMAIN}:${ENV.APP.API_PORT}`;
+  ENV.APP.API_WS_HOST = `${ENV.APP.API_WEBSOCKET_PROTOCOL}://${ENV.APP.API_DOMAIN}:${ENV.APP.API_PORT}`;
 
   return ENV;
 };
