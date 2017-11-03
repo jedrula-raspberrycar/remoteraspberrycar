@@ -53,3 +53,14 @@ Troubleshooting:
   `sudo iw dev wlan0 set power_save off`
     [see here for more details](http://qdosmsq.dunbar-it.co.uk/blog/2016/03/does-your-raspberry-pi-3-lose-wifi-connections-after-a-while/)  
    
+
+
+NOTES
+
+I have been experimenting with speed, benchmarking websockets, tunneling using resin.io and connection straight to my modem
+
+1. websockets is usually a bit faster then fetch but not always
+2. straight modem connection is much faster then resins
+3. there might be room for improvement as right now there is an additional hoop - reverse proxy on NAS (issue with forwarding port 80 so i do 7002->nas->80 on pi)
+4. might be a good idea to let the user choose the transport type and report with the results
+5. right now the lowest we can get is about 70ms with ws and 80ms with fetch, both trnasports rarely go above 300ms mark for a roundtrip

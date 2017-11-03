@@ -46,9 +46,13 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    // ENV.APP.API_HOST = 'http://c88e016b1ddda096c9545e62c8a0a520.resindevice.io';
     ENV.APP.API_DOMAIN = 'jedrula.ddns.net';
     ENV.APP.API_PORT = '7002'; // 7002 goes to my NAS and is reversed proxied to .202 pi
+  }
+
+  if (environment === 'resin') {
+    ENV.APP.API_DOMAIN = 'c88e016b1ddda096c9545e62c8a0a520.resindevice.io';
+    ENV.APP.API_PORT = '80'; // 7002 goes to my NAS and is reversed proxied to .202 pi
   }
 
 
