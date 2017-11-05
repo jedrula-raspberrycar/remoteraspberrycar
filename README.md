@@ -1,4 +1,4 @@
-#Project for remote controlling a raspberry pi car. 
+#Project for remote controlling a raspberry pi car.
 ### Brains of the Pi: nodejs
 ### Web client: Ember app.
 
@@ -26,7 +26,7 @@ to setup and start the app on raspberry pi:
 9. npm start (TODO provide more information on how to start the program as a service on the pi)
 
 
-to setup and start the web client 
+to setup and start the web client
 
 1. clone the repo and enter its directory
 
@@ -34,7 +34,7 @@ to setup and start the web client
 
 3. start ember app
 
-  ember serve --environment production (TODO this probably won't work as you need to modify the dynamically set host api of your pi)  
+  ember serve --environment production (TODO this probably won't work as you need to modify the dynamically set host api of your pi)
 
 4. for frontend development with mirage
 
@@ -49,10 +49,10 @@ Troubleshooting:
   `sudo shutdown -r now`
 
   fixing-wifi-dropout-issues
-  
+
   `sudo iw dev wlan0 set power_save off`
-    [see here for more details](http://qdosmsq.dunbar-it.co.uk/blog/2016/03/does-your-raspberry-pi-3-lose-wifi-connections-after-a-while/)  
-   
+    [see here for more details](http://qdosmsq.dunbar-it.co.uk/blog/2016/03/does-your-raspberry-pi-3-lose-wifi-connections-after-a-while/)
+
 
 
 NOTES
@@ -63,4 +63,4 @@ I have been experimenting with speed, benchmarking websockets, tunneling using r
 2. straight modem connection is much faster then resins
 3. there might be room for improvement as right now there is an additional hoop - reverse proxy on NAS (issue with forwarding port 80 so i do 7002->nas->80 on pi)
 4. might be a good idea to let the user choose the transport type and report with the results
-5. right now the lowest we can get is about 70ms with ws and 80ms with fetch, both trnasports rarely go above 300ms mark for a roundtrip
+5. right now the lowest we can get is about 70ms with ws and 80ms with fetch, both transports rarely go above 300ms mark for a roundtrip
