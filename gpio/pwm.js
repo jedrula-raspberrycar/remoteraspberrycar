@@ -31,6 +31,7 @@ module.exports = {
     return {
       getPinNumber: () => pinNumber,
       write(dutyCycle) {
+        console.log('writing dutyCycle: ' + dutyCycle)
         pwmPin.write(dutyCycle);
       }
     }
