@@ -2,11 +2,12 @@ var async = require('async');
 function Wheel(pwm1, pwm2) {
   return {
     changeSpeed(speed) {
+      speed = parseFloat(speed, 10) / 255;
       if (speed > 0) {
-        pwm2.write(0);
+        pwm2.write(0.0);
         pwm1.write(speed);
       } else {
-        pwm1.write(0);
+        pwm1.write(0.0);
         pwm2.write((-1 * speed));
       }
     },

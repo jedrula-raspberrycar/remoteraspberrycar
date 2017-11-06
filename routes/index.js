@@ -6,7 +6,7 @@ const WheelSerializer = new JSONAPISerializer('wheels', {
 const express = require('express');
 const router = express.Router();
 
-const PWM = require('../gpio/pigpio').PWM;
+const PWM = require('../gpio/pwm').PWM;
 
 const Car = require('../car/index');
 
