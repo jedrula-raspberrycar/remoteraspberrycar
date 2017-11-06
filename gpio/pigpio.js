@@ -21,10 +21,9 @@ module.exports = {
     return {
       getPinNumber: () => pinNumber,
       write(dutyCycle) {
-        console.log('dutyCycle', dutyCycle);
-        const floatDutyCycle = parseFloat(dutyCycle, 10);
-        console.log('writing dutyCycle: ' + floatDutyCycle)
-        pwmPin.pwmWrite(floatDutyCycle);
+        dutyCycle = parseInt(dutyCycle, 10);
+        console.log('writing dutyCycle: ' + dutyCycle)
+        pwmPin.pwmWrite(dutyCycle);
       }
     }
   }

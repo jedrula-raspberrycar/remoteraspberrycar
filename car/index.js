@@ -4,10 +4,10 @@ function Wheel(pwm1, pwm2) {
     changeSpeed(speed) {
       if (speed > 0) {
         pwm2.write(0);
-        pwm1.write(speed / 100);
+        pwm1.write(speed);
       } else {
         pwm1.write(0);
-        pwm2.write((-1 * speed) / 100);
+        pwm2.write((-1 * speed));
       }
     },
     getGpiosStr: () => pwm1.getPinNumber() + ":" + pwm2.getPinNumber() + ":" + speed
