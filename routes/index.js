@@ -6,7 +6,7 @@ const WheelSerializer = new JSONAPISerializer('wheels', {
 const express = require('express');
 const router = express.Router();
 
-const PWM = require('../gpio/pwm').PWM;
+const PWM = require('../gpio/pigpio').PWM;
 
 const Car = require('../car/index');
 
@@ -22,6 +22,7 @@ router.patch('/wheels/:id', function(req, res, next) {
   const id = req.params.id;
   const speed = req.body.data.attributes.speed;
   const wheel = car.wheels[id];
+  console.log('change wheel speed', speed);
   wheel.changeSpeed(speed);
   res.status(204).send();
 });

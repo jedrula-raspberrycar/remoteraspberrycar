@@ -1,5 +1,5 @@
 const async = require('async');
-const PWM = require('../gpio/pwm').PWM;
+const PWM = require('../gpio/pigpio').PWM;
 const one = PWM(13 || process.env.PIN1);
 const two = PWM(15 || process.env.PIN2);
 
