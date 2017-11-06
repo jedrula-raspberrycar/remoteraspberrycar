@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -yq libraspberrypi-bin
 #RUN apt-get update && apt-get install -yq \
 #    alsa-utils libasound2-dev && \
 #    apt-get clean && rm -rf /var/lib/apt/lists/*
+apt-get install pigpio
 
 # Defines our working directory in container
 WORKDIR /usr/src/app
