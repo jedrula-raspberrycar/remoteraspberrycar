@@ -16,7 +16,7 @@ module.exports = {
   // change to pwmFactory or sth
   PWM(pinNumber) {
     // TODO not most robust ! improve when more time
-    let pwmPin = new Gpio(pinNumber, {mode: Gpio.INPUT});
+    let pwmPin = new Gpio(pinNumber, {mode: Gpio.OUTPUT});
 
     return {
       getPinNumber: () => pinNumber,
