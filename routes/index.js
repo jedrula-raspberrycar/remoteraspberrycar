@@ -19,7 +19,7 @@ Promise
       const id = req.params.id;
       const speed = req.body.data.attributes.speed;
       const wheel = car.wheels[id];
-      console.log('change wheel speed', speed);
+      // console.log('change wheel speed', speed);
       wheel.changeSpeed(speed);
       res.status(204).send();
     });
