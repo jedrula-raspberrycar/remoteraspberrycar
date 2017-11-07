@@ -30,7 +30,7 @@ module.exports = {
         resolve({
           getPinNumber: () => pinNumber,
           write(dutyCycle) {
-            console.log('writing dutyCycle to pinNumber: ' + dutyCycle, typeof dutyCycle, Number.isInteger(dutyCycle))
+            console.log(`writing dutyCycle ${dutyCycle} to pinNumber: ${pinNumber}`, typeof dutyCycle, Number.isInteger(dutyCycle))
             pwmPin.write(dutyCycle);
           }
         });
