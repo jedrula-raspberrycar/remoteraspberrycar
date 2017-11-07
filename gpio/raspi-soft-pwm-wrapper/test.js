@@ -8,12 +8,12 @@ Promise
     pwm7.write(0.8);
     pwm11.write(0);
   })
-  .then(waitOneSec);
+  .then(waitOneSec)
   .then(() => {
     pwm7.write(0);
     pwm11.write(0);
   })
-  .then(waitOneSec);
+  .then(waitOneSec)
   .then(() => {
     pwm7.write(1);
     pwm11.write(0);
