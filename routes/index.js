@@ -16,6 +16,7 @@ Promise
     console.log('initated car, setting up patch and get routes');
     const car = Car(...pwms);
     router.patch('/wheels/:id', function(req, res, next) {
+      console.log('req.body', req.body);
       const id = req.params.id;
       const speed = req.body.data.attributes.speed;
       const wheel = car.wheels[id];
@@ -25,6 +26,7 @@ Promise
     });
 
     router.get('/wheels/:id', (req, res, next) => { //TODO read actual speed from pins
+
       const data = WheelSerializer.serialize({
         id: req.params.id,
         speed: 0

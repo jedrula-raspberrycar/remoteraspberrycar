@@ -24,7 +24,8 @@ Promise
 
 /*
 const PWM = require('./raspi-soft-pwm-wrapper').PWM; let pwm7, pwm11; Promise.all([PWM(7), PWM(11)]).then(([pwm1, pwm2]) => { pwm7 = pwm1; pwm11 = pwm2;});
-pwm7.write(0);pwm11.write(1);
+pwm11.write(0);pwm7.write(1);
+pwm7.write(0);pwm11.write(0);
 
 let pwm13, pwm15; Promise.all([PWM(13), PWM(15)]).then(([pwm1, pwm2]) => { pwm13 = pwm1; pwm15 = pwm2;});
 
