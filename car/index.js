@@ -1,4 +1,3 @@
-var async = require('async');
 function Wheel(pwm1, pwm2) {
   return {
     changeSpeed(speed) {

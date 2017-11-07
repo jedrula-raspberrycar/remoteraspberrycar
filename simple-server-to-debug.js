@@ -7,11 +7,14 @@ app.use(cors());
 const bodyParser = require('body-parser');
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 
-Promise.all([PWM(7), PWM(11)]).then(([pwm7, pwm11]) => {
-  app.patch('*', function(req, res, next) {
-    pwm7.write(0);
-    pwm11.write(0);
-    console.log(req.body); res.json({ wow: 'x' });
+Promise.all([PWM(7), PWM(11), PWM(13), PWM(15)]).then((pwms) => {
+  app.patch('/car', function(req, res, next) {
+    // FIXME add security!
+    const dutyCycles = req.body.dutyCycles;
+    dutyCycles.forEach((dutyCycle, index) => {
+      pwms[index].write(dutyCycle);
+    });
+    res.json({ wow: req.body });
   });
 })
 
