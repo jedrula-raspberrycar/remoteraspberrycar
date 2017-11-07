@@ -2,7 +2,7 @@
 const express = require('express');
 const cors = require('cors');
 const app = new express();
-const PWM = require('./gpio/raspi-soft-owm-wrapper/raspi-soft-owm-wrapper').PWM;
+const PWM = require('./gpio/raspi-soft-pwm-wrapper/raspi-soft-pwm-wrapper').PWM;
 app.use(cors());
 const bodyParser = require('body-parser');
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));

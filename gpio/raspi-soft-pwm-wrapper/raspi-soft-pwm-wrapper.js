@@ -24,16 +24,18 @@ module.exports = {
   PWM(pinNumber) {
     // TODO not most robust ! improve when more time
     let pwmPin;
-    raspi.init(() => {
-      pwmPin = new pwm.SoftPWM(`P1-${pinNumber}`);
+    const promise = new Promise((resolve, reject) => {
+      raspi.init(() => {
+        pwmPin = new pwm.SoftPWM(`P1-${pinNumber}`);
+        resolve({
+          getPinNumber: () => pinNumber,
+          write(dutyCycle) {
+            console.log(`writing dutyCycle ${dutyCycle} to pinNumber: ${pinNumber}`, typeof dutyCycle, Number.isInteger(dutyCycle))
+            pwmPin.write(dutyCycle);
+          }
+        });
+      });
     });
-
-    return {
-      getPinNumber: () => pinNumber,
-      write(dutyCycle) {
-        console.log('writing dutyCycle: ' + dutyCycle)
-        pwmPin.write(dutyCycle);
-      }
-    }
+    return promise;
   }
 };
