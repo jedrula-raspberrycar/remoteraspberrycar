@@ -1,5 +1,5 @@
 const async = require('async');
-const GpioOut = require('../gpio/gpio').GpioOut;
+const GpioOut = require('../gpio/rpi-gpio-wrapper').GpioOut;
 const one = GpioOut(13 || process.env.PIN1);
 const two = GpioOut(15 || process.env.PIN2);
 

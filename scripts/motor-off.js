@@ -1,4 +1,4 @@
-const GpioOut = require('../gpio/gpio').GpioOut;
+const GpioOut = require('../gpio/rpi-gpio-wrapper').GpioOut;
 const one = GpioOut(7);
 const two = GpioOut(11);
 setTimeout(() => {
