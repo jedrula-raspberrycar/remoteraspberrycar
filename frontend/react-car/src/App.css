@@ -1,28 +1,63 @@
-.App {
+/*$handleSize: 100px;*/
+/*$runnableTrackHeight: 8px;*/
+/*$calcMarginTop: -1 * ($handleSize - $runnableTrackHeight) / 2;*/
+body {
+  padding: 20px;
   text-align: center;
+
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
+button {
+  display: block;
+  width: 60px;
   height: 80px;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.wheels {
+  margin: 0 auto;
+  width: 200px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  -webkit-transform: rotate(-90deg);
+  margin-top: 120px;
 }
 
-.App-title {
-  font-size: 1.5em;
+input[type=range] {
+    /*removes default webkit styles*/
+    -webkit-appearance: none;
+    /*fix for FF unable to apply focus style bug */
+    border: 1px solid white;
+    /*required for proper track sizing in FF*/
+    width: 300px;
+    height: 100px; /* handleSize */
 }
 
-.App-intro {
-  font-size: large;
+
+.wheels div:first-child {
+  margin-bottom: 100px;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+input[type=range]::-webkit-slider-runnable-track {
+    width: 300px;
+    height: 8px; /* $runnableTrackHeight; */
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 100px;
+    width: 100px; /* $handleSize */
+    border-radius: 50%;
+    background: goldenrod;
+    margin-top: -46px;
+}
+input[type=range]:focus {
+    outline: none;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ccc;
 }

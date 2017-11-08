@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-
+import './App.css';
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <input type="range" onInput={this.inputEvent.bind(this)} />
-      </div>
+      <input
+        value={this.props.speed}
+        type="range"
+        onInput={(event) => this.props.changeSpeed(event.target.value)}
+        onMouseUp={this.props.changeSpeed.bind(this, 50)}
+        readOnly="true"
+      />
     );
-  }
-
-  inputEvent({ target: { value } }) {
-    this.props.changeSpeed(value);
   }
 }
 
