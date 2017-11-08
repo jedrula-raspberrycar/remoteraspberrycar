@@ -62,7 +62,8 @@ export default class GlimmerCar extends Component {
     const body = JSON.stringify({ pulseModulations });
     // // const endpoint = `http://raspberrypi.local:3001/wheels/${id}`;
     // const endpoint = 'http://localhost:8432/car';
-    const endpoint = `http://raspberrypi.local:8432/car`;
+    // const endpoint = `http://raspberrypi.local:80/car`;
+    const endpoint = `http://jedrula.ddns.net:7002/car`;
     const response = await fetch(endpoint, {
       method: 'PATCH',
       body,
