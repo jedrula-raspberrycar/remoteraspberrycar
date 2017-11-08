@@ -12,7 +12,7 @@ Promise.all([PWM(7), PWM(11), PWM(13), PWM(15)]).then((pwms) => {
     // FIXME add security!
     const dutyCycles = req.body.dutyCycles;
     dutyCycles.forEach((dutyCycle, index) => {
-      pwms[index].write(dutyCycle);
+      pwms[index].write(dutyCycle / 255);
     });
     res.json({ wow: req.body });
   });
