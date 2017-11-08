@@ -1,4 +1,3 @@
-// server to debug fetch api
 const express = require('express');
 const cors = require('cors');
 const app = new express();
@@ -18,5 +17,7 @@ Promise.all([PWM(7), PWM(11), PWM(13), PWM(15)]).then((pwms) => {
   });
 })
 
-
-app.listen(8432);
+const port = parseInt(process.env.PORT || 80);
+app.listen(port, '0.0.0.0', () => {
+  console.log(`listening on ${port}`);
+});
