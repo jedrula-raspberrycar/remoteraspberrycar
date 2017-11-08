@@ -10,9 +10,9 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 Promise.all([PWM(7), PWM(11), PWM(13), PWM(15)]).then((pwms) => {
   app.patch('/car', function(req, res, next) {
     // FIXME add security!
-    const dutyCycles = req.body.dutyCycles;
-    dutyCycles.forEach((dutyCycle, index) => {
-      pwms[index].write(dutyCycle / 255);
+    const dutyCycles = req.body.pulseModulations;
+    pulseModulations.forEach((pulseModulation, index) => {
+      pwms[index].write(pulseModulation);
     });
     res.json({ wow: req.body });
   });
