@@ -1,7 +1,7 @@
 {
   "name": "glimmer-car",
   "version": "0.0.0",
-  "description": "A brand new Glimmer app.",
+  "description": "Glimmer controlled pi car.",
   "directories": {
     "doc": "doc",
     "test": "tests"
