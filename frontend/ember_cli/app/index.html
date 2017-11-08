@@ -9,17 +9,17 @@
 
     {{content-for "head"}}
 
-    <link rel="stylesheet" href="assets/vendor.css">
-    <link rel="stylesheet" href="assets/ember-remoteraspberrycar.css">
+    <link integrity="" rel="stylesheet" href="{{rootURL}}assets/vendor.css">
+    <link integrity="" rel="stylesheet" href="{{rootURL}}assets/ember-remoteraspberrycar.css">
 
     {{content-for "head-footer"}}
   </head>
   <body>
     {{content-for "body"}}
 
-    <script src="assets/vendor.js"></script>
-    <script src="assets/ember-remoteraspberrycar.js"></script>
     <!-- <script src="https://rawgit.com/131/h264-live-player/master/vendor/dist/http-live-player.js"></script> -->
+    <script src="{{rootURL}}assets/vendor.js"></script>
+    <script src="{{rootURL}}assets/ember-remoteraspberrycar.js"></script>
 
     {{content-for "body-footer"}}
   </body>

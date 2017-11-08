@@ -1,66 +1,62 @@
-$handleSize: 100px;
-$runnableTrackHeight: 8px;
-$calcMarginTop: -1 * ($handleSize - $runnableTrackHeight) / 2;
-body {
-  padding: 20px;
-  text-align: center;
+// $handleSize: 100px;
+// $runnableTrackHeight: 8px;
+// $calcMarginTop: -1 * ($handleSize - $runnableTrackHeight) / 2;
+// body {
+//   padding: 20px;
+//   text-align: center;
 
-}
+// }
 
-button {
-  display: block;
-  width: 60px;
-  height: 80px;
-}
+// button {
+//   display: block;
+//   width: 60px;
+//   height: 80px;
+// }
 
-.wheels {
-  margin: 0 auto;
-  width: 200px;
-  height: 300px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  -webkit-transform: rotate(-90deg);
-  margin-top: 120px;
-}
-
-// https://stackoverflow.com/questions/15935837/how-to-display-a-range-input-slider-vertically
-
-input[type=range] {
-    /*removes default webkit styles*/
-    -webkit-appearance: none;
-    /*fix for FF unable to apply focus style bug */
-    border: 1px solid white;
-    /*required for proper track sizing in FF*/
-    width: 300px;
-    height: $handleSize;
-}
+// .wheels {
+//   margin: 0 auto;
+//   width: 200px;
+//   height: 300px;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-between;
+//   -webkit-transform: rotate(-90deg);
+//   margin-top: 120px;
+// }
 
 
-.wheels div:first-child {
-  margin-bottom: 100px;
-}
+// input[type=range] {
+//     -webkit-appearance: none;
+//     border: 1px solid white;
+//     width: 300px;
+//     height: $handleSize;
+// }
 
-input[type=range]::-webkit-slider-runnable-track {
-    width: 300px;
-    height: $runnableTrackHeight;
-    background: #ddd;
-    border: none;
-    border-radius: 3px;
-}
-input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    border: none;
-    height: $handleSize;
-    width: $handleSize;
-    border-radius: 50%;
-    background: goldenrod;
-    margin-top: $calcMarginTop;
-    // 28px
-}
-input[type=range]:focus {
-    outline: none;
-}
-input[type=range]:focus::-webkit-slider-runnable-track {
-    background: #ccc;
-}
+
+// .wheels div:first-child {
+//   margin-bottom: 100px;
+// }
+
+// input[type=range]::-webkit-slider-runnable-track {
+//     width: 300px;
+//     height: $runnableTrackHeight;
+//     background: #ddd;
+//     border: none;
+//     border-radius: 3px;
+// }
+// input[type=range]::-webkit-slider-thumb {
+//     -webkit-appearance: none;
+//     border: none;
+//     height: $handleSize;
+//     width: $handleSize;
+//     border-radius: 50%;
+//     background: goldenrod;
+//     margin-top: $calcMarginTop;
+//     // 28px
+// }
+// input[type=range]:focus {
+//     outline: none;
+// }
+// input[type=range]:focus::-webkit-slider-runnable-track {
+//     background: #ccc;
+// }
