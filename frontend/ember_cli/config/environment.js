@@ -39,10 +39,10 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
   }
 
-  if (environment === 'lan') {
+  if (environment === 'pizero') {
     // TODO make this smarter! read qr code and determine dynamicaly ?
-    ENV.APP.API_DOMAIN = 'raspberrypi.local';
-    ENV.APP.API_PORT = '3001';
+    ENV.APP.API_DOMAIN = '192.168.1.202';
+    ENV.APP.API_PORT = '80';
   }
 
   if (environment === 'pi3') {
