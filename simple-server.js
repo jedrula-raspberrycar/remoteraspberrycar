@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 require('express-ws')(app);
+const raspividStream = require('raspivid-stream');
 const PWM = require('./gpio/raspi-soft-pwm-wrapper/raspi-soft-pwm-wrapper').PWM;
 app.use(cors());
 const bodyParser = require('body-parser');
