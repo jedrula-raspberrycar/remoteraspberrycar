@@ -1,10 +1,8 @@
 // move from frontend direcory!
 const express = require('express');
 const app = express();
-require('express-ws')(app);
+const expressWs = require('express-ws')(app);
 const raspividStream = require('raspivid-stream');
-const videoStream = raspividStream({ rotation: 180 });
-
 app.ws('/video-stream', (ws, req) => {
     console.log('Client connected');
 
@@ -14,14 +12,18 @@ app.ws('/video-stream', (ws, req) => {
       height: '540'
     }));
 
-    videoStream.on('data', (data) => {
-      ws.send(data, { binary: true }, (error) => { if (error) console.error(error); });
-    });
-
     ws.on('close', () => {
         console.log('Client left');
-        videoStream.removeAllListeners('data');
     });
+});
+
+const videoStreamWss = expressWs.getWss('/a');
+
+const videoStream = raspividStream({ rotation: 180 });
+videoStream.on('data', (data) => {
+  videoStreamWss.clients.forEach((client) => {
+    client.send(data, { binary: true }, (error) => { if (error) console.error(error); });
+  });
 });
 
 app.listen(80, '0.0.0.0', () => {
