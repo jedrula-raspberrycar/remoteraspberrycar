@@ -1,11 +1,11 @@
 // move from frontend direcory!
 const express = require('express');
 const http = require('http');
-const raspividStream = require('raspivid-stream');
 
 const app = express();
 const server = http.createServer(app);
-
+var expressWs = require('express-ws')(app, server);
+const raspividStream = require('raspivid-stream');
 app.ws('/video-stream', (ws, req) => {
     console.log('Client connected');
 
