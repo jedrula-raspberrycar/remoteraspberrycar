@@ -1,8 +1,10 @@
 {
   "scripts": {
-    "start": "node node_modules/http-server/bin/http-server"
+    "start": "node index.js"
   },
-  "devDependencies": {
-    "http-server": "^0.10.0"
+
+  "dependencies": {
+    "raspivid-stream": "^0.2.1-beta",
+    "express": "^4.15.2",
   }
 }

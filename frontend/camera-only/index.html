@@ -6,5 +6,12 @@
   <body>
     <script src="https://rawgit.com/131/h264-live-player/master/vendor/dist/http-live-player.js"></script>
     <h1>testing camera</h1>
+    <script>
+    const canvas = document.createElement("canvas");
+    document.body.appendChild(canvas); // TODO maybe add canvas straight to body ?
+    const wsavc = new WSAvcPlayer(canvas, "webgl"); // , 1, 35
+    const uri = "ws://127.0.0.1:8080/video-stream";
+    wsavc.connect(uri);
+    </script>
   </body>
 </html>
