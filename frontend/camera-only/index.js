@@ -8,8 +8,14 @@ const app = express();
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
+let counter = 0;
+const sockets = {};
+
 wss.on('connection', function connection(ws, req) {
-   console.log('Client connected');
+  console.log('Client connected');
+  counter++;
+  ws.counter = counter;
+  sockets[counter] = ws;
   ws.send(JSON.stringify({
     action: 'init',
     width: '960',
@@ -17,12 +23,17 @@ wss.on('connection', function connection(ws, req) {
   }));
   ws.on('close', () => {
       console.log('Client left');
+      delete sockets[ws.counter];
   });
 });
 
 const videoStream = raspividStream({ rotation: 180 });
+
+
 videoStream.on('data', (data) => {
-  wss.clients.forEach(function each(client) {
+  const socketIds = Object.keys(sockets);
+  socketIds.forEach(function each(key) {
+    const client = sockets[key];
     if (client.readyState === WebSocket.OPEN) {
       client.send(data, { binary: true }, (error) => { if (error) console.error(error); });
     }
