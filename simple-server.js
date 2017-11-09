@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const app = new express();
+const app = express();
 require('express-ws')(app);
 const PWM = require('./gpio/raspi-soft-pwm-wrapper/raspi-soft-pwm-wrapper').PWM;
 app.use(cors());

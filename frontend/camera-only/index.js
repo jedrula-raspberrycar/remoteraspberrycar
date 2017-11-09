@@ -1,7 +1,6 @@
 // move from frontend direcory!
 const express = require('express');
 const app = express();
-const server = http.createServer(app);
 require('express-ws')(app);
 const raspividStream = require('raspivid-stream');
 app.ws('/video-stream', (ws, req) => {
