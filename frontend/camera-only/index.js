@@ -4,7 +4,7 @@ const http = require('http');
 
 const app = express();
 const server = http.createServer(app);
-var expressWs = require('express-ws')(app, server);
+require('express-ws')(app, server);
 const raspividStream = require('raspivid-stream');
 app.ws('/video-stream', (ws, req) => {
     console.log('Client connected');
