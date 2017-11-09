@@ -1,10 +1,8 @@
 // move from frontend direcory!
 const express = require('express');
-const http = require('http');
-
 const app = express();
 const server = http.createServer(app);
-require('express-ws')(app, server);
+require('express-ws')(app);
 const raspividStream = require('raspivid-stream');
 app.ws('/video-stream', (ws, req) => {
     console.log('Client connected');
@@ -27,6 +25,6 @@ app.ws('/video-stream', (ws, req) => {
     });
 });
 
-server.listen(8581, '0.0.0.0', () => {
-  console.log(`listening on ${server.address().port}`);
+app.listen(80, '0.0.0.0', () => {
+  console.log(`listening on 80`);
 });
