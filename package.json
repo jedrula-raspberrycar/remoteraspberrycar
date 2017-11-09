@@ -35,6 +35,7 @@
     "raspi": "^5.0.1",
     "raspi-soft-pwm": "^4.0.1",
     "raspivid-stream": "^0.2.1-beta",
-    "rpi-gpio": "^0.9.1"
+    "rpi-gpio": "^0.9.1",
+    "ws": "^3.3.1"
   }
 }
