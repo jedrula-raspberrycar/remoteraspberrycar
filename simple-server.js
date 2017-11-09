@@ -30,9 +30,15 @@ wss.on('connection', function connection(ws, req) {
 
   const videoStream = raspividStream({ rotation: 180 });
 
+  // buzy inspired by: https://github.com/131/h264-live-player/blob/master/lib/_server.js#L42
+
   videoStream.on('data', (data) => {
-    if (ws.readyState === WebSocket.OPEN) {
-      ws.send(data, { binary: true }, (error) => { if (error) console.error(error); });
+    if (!ws.buzy && ws.readyState === WebSocket.OPEN) {
+      ws.buzy = true;
+      ws.send(data, { binary: true }, (error) => {
+        if (error) console.error(error);
+        ws.buzy = false;
+      });
     }
   });
 
