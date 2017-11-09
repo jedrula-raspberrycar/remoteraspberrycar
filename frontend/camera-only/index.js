@@ -27,7 +27,6 @@ app.ws('/video-stream', (ws, req) => {
     });
 });
 
-const port = parseInt(process.env.PORT || 80);
-server.listen(port, '0.0.0.0', () => {
+server.listen(8581, '0.0.0.0', () => {
   console.log(`listening on ${server.address().port}`);
 });

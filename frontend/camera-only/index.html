@@ -10,7 +10,7 @@
     const canvas = document.createElement("canvas");
     document.body.appendChild(canvas); // TODO maybe add canvas straight to body ?
     const wsavc = new WSAvcPlayer(canvas, "webgl"); // , 1, 35
-    const uri = "ws://127.0.0.1:8080/video-stream";
+    const uri = "ws://192.168.1.201:8581/video-stream";
     wsavc.connect(uri);
     </script>
   </body>
