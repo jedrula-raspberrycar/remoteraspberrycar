@@ -45,6 +45,12 @@ module.exports = function(environment) {
     ENV.APP.API_PORT = '3001';
   }
 
+  if (environment === 'pi3') {
+    // TODO make this smarter! read qr code and determine dynamicaly ?
+    ENV.APP.API_DOMAIN = '192.168.1.201';
+    ENV.APP.API_PORT = '80';
+  }
+
   if (environment === 'production') {
     ENV.APP.API_DOMAIN = 'jedrula.ddns.net';
     ENV.APP.API_PORT = '7002'; // 7002 goes to my NAS and is reversed proxied to .202 pi

@@ -1,11 +1,12 @@
 import Ember from 'ember';
+import config from 'ember-remoteraspberrycar/config/environment';
+
+const { APP: { API_WS_HOST } } = config;
 
 export default Ember.Component.extend({
   didRender() {
     const canvas = this.$('canvas').get(0);
     const wsavc = new WSAvcPlayer(canvas, "webgl"); // , 1, 35
-    // const uri = "ws://jedrula.ddns.net:7002";
-    const uri = "ws://192.168.1.201:80";
-    wsavc.connect(uri);
+    wsavc.connect(API_WS_HOST);
   }
 });

@@ -1,5 +1,8 @@
 import Ember from 'ember';
 import fetch from 'fetch';
+import config from 'ember-remoteraspberrycar/config/environment';
+
+const { APP: { API_HOST } } = config;
 
 const { Controller, set } = Ember;
 
@@ -57,7 +60,7 @@ export default Controller.extend({
   async sendCarPatch(...pulseModulations) {
     this.sendingRequest = true;
     const body = JSON.stringify({ pulseModulations });
-    const endpoint = `http://jedrula.ddns.net:7002/car`;
+    const endpoint = `${API_HOST}/car`;
     const response = await fetch(endpoint, {
       method: 'PATCH',
       body,
