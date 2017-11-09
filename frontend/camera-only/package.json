@@ -1,11 +1,14 @@
 {
   "scripts": {
-    "start": "node index.js"
+    "start": "sudo node index.js",
+    "index-serve": "node ./node_modules/http-server/bin/http-server"
   },
-
   "dependencies": {
     "raspivid-stream": "^0.2.1-beta",
     "express": "^4.15.2",
     "express-ws": "^3.0.0"
+  },
+  "devDependencies": {
+    "http-server": "^0.10.0"
   }
 }
