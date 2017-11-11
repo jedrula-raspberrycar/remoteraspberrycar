@@ -13,10 +13,14 @@
     // const uri = "ws://c88e016b1ddda096c9545e62c8a0a520.resindevice.io";
     // const uri = "ws://jedrula.ddns.net:7002";
     // const uri = "ws://jedrula.ddns.net:7003";
-    // const uri = "ws://192.168.1.201:80";
-    const uri = "ws://192.168.1.202:80";
+    const uri = "ws://192.168.1.201:5001";
+    // const uri = "ws://192.168.1.202:80";
+    // const uri = "ws://192.168.1.201:8080";
     // const uri = "ws://192.168.1.201:8581/video-stream";
     wsavc.connect(uri);
+    setTimeout(() => {
+      // wsavc.playStream();
+    }, 3000)
     </script>
   </body>
 </html>

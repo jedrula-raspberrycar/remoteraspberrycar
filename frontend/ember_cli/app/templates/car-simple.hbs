@@ -1,5 +1,5 @@
-{{live-feed}}
 <div class="wheels">
   {{wheel-component-simple speed=car.left changeSpeed=(action 'changeSpeed' 'left')}}
+  {{rpi-cam-web-interface-feed class="live-feed"}}
   {{wheel-component-simple speed=car.right changeSpeed=(action 'changeSpeed' 'right')}}
 </div>

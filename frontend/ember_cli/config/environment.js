@@ -17,7 +17,8 @@ module.exports = function(environment) {
       API_SERVER_PROTOCOL: 'http',
       API_WEBSOCKET_PROTOCOL: 'ws',
       API_DOMAIN: 'localhost',
-      API_PORT: '3000'
+      API_PORT: '3000',
+      CAMERA_PORT: '80',
     }
   };
 
@@ -48,7 +49,14 @@ module.exports = function(environment) {
   if (environment === 'pi3') {
     // TODO make this smarter! read qr code and determine dynamicaly ?
     ENV.APP.API_DOMAIN = '192.168.1.201';
-    ENV.APP.API_PORT = '80';
+    ENV.APP.API_PORT = '3002';
+  }
+
+  if (environment === 'pi3-internet') {
+    // TODO make this smarter! read qr code and determine dynamicaly ?
+    ENV.APP.API_DOMAIN = 'jedrula.ddns.net';
+    ENV.APP.API_PORT = '3002';
+    ENV.APP.CAMERA_PORT = '7003';
   }
 
   if (environment === 'production') {
@@ -62,6 +70,7 @@ module.exports = function(environment) {
   }
 
 
+  ENV.APP.CAMERA_HOST = `${ENV.APP.API_SERVER_PROTOCOL}://${ENV.APP.API_DOMAIN}:${ENV.APP.CAMERA_PORT}`;
   ENV.APP.API_HOST = `${ENV.APP.API_SERVER_PROTOCOL}://${ENV.APP.API_DOMAIN}:${ENV.APP.API_PORT}`;
   ENV.APP.API_WS_HOST = `${ENV.APP.API_WEBSOCKET_PROTOCOL}://${ENV.APP.API_DOMAIN}:${ENV.APP.API_PORT}`;
 
