@@ -23,12 +23,23 @@ Promise.all([PWM(7), PWM(11), PWM(13), PWM(15)]).then((pwms) => {
   });
 });
 
+/*
+this is how you would install the camera server
+https://elinux.org/RPi-Cam-Web-Interface#Basic_Installation
+sudo apt-get update
+sudo apt-get dist-upgrade
+git clone https://github.com/silvanmelchior/RPi_Cam_Web_Interface.git
+cd RPi_Cam_Web_Interface/
+./install.sh
+go to: http://192.168.1.201/html/
+*/
+
 const httpProxy = require('http-proxy');
 const proxy = httpProxy.createProxyServer({});
 const CAMERA_PORT = 3080;
-app.get('/html/cam_pic.php', (req, res) => {
-  // proxy.web(req, res, { target: `http://127.0.0.1:${CAMERA_PORT}` });
-  proxy.web(req, res, { target: `http://192.168.1.201:${CAMERA_PORT}` });
+app.get('/stream', (req, res) => {
+  proxy.web(req, res, { target: `http://127.0.0.1:${CAMERA_PORT}` });
+  // proxy.web(req, res, { target: `http://192.168.1.201:${CAMERA_PORT}` });
 });
 
 const port = parseInt(process.env.PORT || 80);
