@@ -36,7 +36,8 @@ button {
 
 
 .live-feed {
-  width: calc(100% - 150px)
+  width: calc(100% - 150px);
+  transform: rotate(180deg);
 }
 
 .live-feed img {
