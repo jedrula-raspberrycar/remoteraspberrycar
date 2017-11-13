@@ -12,26 +12,21 @@ RUN apt-get update
 
 RUN apt-get -y upgrade
 
-RUN apt-get install uv4l uv4l-raspicam
+# RUN apt-get install uv4l uv4l-raspicam
 
-RUN apt-get install uv4l-raspicam-extras
+# RUN apt-get install uv4l-raspicam-extras
 
-RUN apt-get install uv4l-server
+# RUN apt-get install uv4l-server
 
-RUN apt-get install uv4l-uvc
+# RUN apt-get install uv4l-uvc
 
-RUN apt-get install uv4l-xscreen
+# RUN apt-get install uv4l-xscreen
 
-RUN apt-get install uv4l-mjpegstream
+# RUN apt-get install uv4l-mjpegstream
 
 
 RUN apt-get update && apt-get install -yq libraspberrypi-bin
 
-# use apt-get if you need to install dependencies,
-# for instance if you need ALSA sound utils, just uncomment the lines below.
-#RUN apt-get update && apt-get install -yq \
-#    alsa-utils libasound2-dev && \
-#    apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN apt-get install pigpio
 
 # Defines our working directory in container
