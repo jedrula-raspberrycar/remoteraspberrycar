@@ -2,6 +2,8 @@ docker build -t jedrula-remoteraspberrycar .
 docker tag jedrula-remoteraspberrycar jedrula/jedrula-remoteraspberrycar
 docker push jedrula/jedrula-remoteraspberrycar
 
+https://www.linux-projects.org/uv4l/installation/
+
 
 #Project for remote controlling a raspberry pi car.
 ### Brains of the Pi: nodejs
