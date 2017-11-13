@@ -2,7 +2,7 @@
 # see more about dockerfile templates here: http://docs.resin.io/deployment/docker-templates/
 # and about resin base images here: http://docs.resin.io/runtime/resin-base-images/
 # Note the node:slim image doesn't have node-gyp
-FROM FROM arm32v7/node
+FROM arm32v7/node
 
 RUN curl http://www.linux-projects.org/listing/uv4l_repo/lrkey.asc | apt-key add -
 
