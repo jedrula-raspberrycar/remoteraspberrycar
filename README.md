@@ -1,3 +1,8 @@
+docker build -t jedrula-remoteraspberrycar .
+docker tag jedrula-remoteraspberrycar jedrula/jedrula-remoteraspberrycar
+docker push jedrula/jedrula-remoteraspberrycar
+
+
 #Project for remote controlling a raspberry pi car.
 ### Brains of the Pi: nodejs
 ### Web client: Ember app.

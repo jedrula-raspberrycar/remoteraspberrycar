@@ -4,13 +4,13 @@
 # Note the node:slim image doesn't have node-gyp
 FROM arm32v7/node
 
-RUN curl http://www.linux-projects.org/listing/uv4l_repo/lrkey.asc | apt-key add -
+RUN curl http://www.linux-projects.org/listing/uv4l_repo/lpkey.asc | apt-key add -
 
-RUN echo "deb http://www.linux-projects.org/listing/uv4l_repo/raspbian/ jessie main" | tee -a /etc/apt/sources.list
+RUN echo "deb http://www.linux-projects.org/listing/uv4l_repo/raspbian/stretch stretch main" | tee -a /etc/apt/sources.list
 
 RUN apt-get update
 
-RUN apt-get upgrade
+RUN apt-get -y upgrade
 
 RUN apt-get install uv4l uv4l-raspicam
 
