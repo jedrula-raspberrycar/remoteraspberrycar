@@ -4,7 +4,10 @@
 # Note the node:slim image doesn't have node-gyp
 FROM arm32v7/node:latest
 
+# TODO fold RUN cmds to one cmd
+
 # RUN curl http://www.linux-projects.org/listing/uv4l_repo/lpkey.asc | apt-key add -
+# RUN curl http://www.linux-projects.org/listing/uv4l_repo/lrkey.asc | apt-key add -
 
 # RUN echo "deb http://www.linux-projects.org/listing/uv4l_repo/raspbian/stretch stretch main" | tee -a /etc/apt/sources.list
 
@@ -23,6 +26,11 @@ RUN apt-get -y upgrade
 # RUN apt-get install uv4l-xscreen
 
 # RUN apt-get install uv4l-mjpegstream
+
+RUN apt-get install uv4l-webrtc-armv6
+
+# this for rpi2 or 3 (https://www.linux-projects.org/uv4l/installation/)
+# RUN apt-get install uv4l-webrtc
 
 
 RUN apt-get update && apt-get install -yq libraspberrypi-bin
@@ -47,3 +55,5 @@ ENV INITSYSTEM on
 
 # server.js will run when container starts up on the device
 CMD ["npm", "start"]
+
+# sudo uv4l --auto-video_nr --driver raspicam --encoding mjpeg --width 640 --height 480 --framerate 20 --server-option '--port=3080'
