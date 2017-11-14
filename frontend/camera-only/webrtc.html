@@ -7,7 +7,7 @@
         <script type="text/javascript">
 
             const signalling_server_hostname =  "192.168.1.204";
-            var signalling_server_address = signalling_server_hostname + ':' + (location.port || (location.protocol === 'https:' ? 443 : 80));
+            var signalling_server_address = signalling_server_hostname + ':' + '3080';
             var isFirefox = typeof InstallTrigger !== 'undefined';// Firefox 1.0+
 
             addEventListener("DOMContentLoaded", function () {
@@ -59,11 +59,29 @@
                     var pcConfig_ = pcConfig;
                     console.log(JSON.stringify(pcConfig_));
                     pc = new RTCPeerConnection(pcConfig_, {});
+                    pc.onicecandidate = onIceCandidate;
                     pc.onaddstream = onRemoteStreamAdded;
                     pc.onremovestream = onRemoteStreamRemoved;
                     console.log("peer connection successfully created!");
                 } catch (e) {
                     console.error("createPeerConnection() failed");
+                }
+            }
+
+            function onIceCandidate(event) {
+                if (event.candidate) {
+                    var candidate = {
+                        sdpMLineIndex: event.candidate.sdpMLineIndex,
+                        sdpMid: event.candidate.sdpMid,
+                        candidate: event.candidate.candidate
+                    };
+                    var request = {
+                        what: "addIceCandidate",
+                        data: JSON.stringify(candidate)
+                    };
+                    ws.send(JSON.stringify(request));
+                } else {
+                    console.log("End of candidates.");
                 }
             }
 
@@ -85,6 +103,7 @@
                     document.getElementById("start").disabled = true;
                     document.documentElement.style.cursor = 'wait';
                     var server = document.getElementById("signalling_server").value.toLowerCase();
+                    // debugger;
 
                     var protocol = location.protocol === "https:" ? "wss:" : "ws:";
                     ws = new WebSocket(protocol + '//' + server + '/stream/webrtc');
