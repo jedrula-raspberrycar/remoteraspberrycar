@@ -102,11 +102,9 @@
                     document.getElementById("stop").disabled = false;
                     document.getElementById("start").disabled = true;
                     document.documentElement.style.cursor = 'wait';
-                    var server = document.getElementById("signalling_server").value.toLowerCase();
-                    // debugger;
 
                     var protocol = location.protocol === "https:" ? "wss:" : "ws:";
-                    ws = new WebSocket(protocol + '//' + server + '/stream/webrtc');
+                    ws = new WebSocket(protocol + '//' + signalling_server_address + '/stream/webrtc');
 
                     function call(stream) {
                         createPeerConnection();
@@ -237,6 +235,20 @@
                                 };
                                 console.log(request);
                                 ws.send(JSON.stringify(request));
+                                break;
+
+                              case "iceCandidates":
+                                var candidates = JSON.parse(msg.data);
+                                for (var i = 0; candidates && i < candidates.length; i++) {
+                                    var elt = candidates[i];
+                                    let candidate = new RTCIceCandidate({sdpMLineIndex: elt.sdpMLineIndex, candidate: elt.candidate});
+                                    pc.addIceCandidate(
+                                      candidate,
+                                      () => console.log("IceCandidate added: " + JSON.stringify(candidate)),
+                                      (error) => console.error("addIceCandidate error: " + error)
+                                    );
+                                }
+                                document.documentElement.style.cursor = 'default';
                                 break;
                         }
                     };
