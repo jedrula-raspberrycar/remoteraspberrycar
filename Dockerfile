@@ -2,7 +2,7 @@
 # see more about dockerfile templates here: http://docs.resin.io/deployment/docker-templates/
 # and about resin base images here: http://docs.resin.io/runtime/resin-base-images/
 # Note the node:slim image doesn't have node-gyp
-FROM arm32v7/node:latest
+FROM arm32v7/node:8.9.1-stretch
 
 # TODO fold RUN cmds to one cmd
 
@@ -13,7 +13,7 @@ FROM arm32v7/node:latest
 
 RUN apt-get update
 
-RUN apt-get -y upgrade
+RUN apt-get -y dist-upgrade
 
 # RUN apt-get install uv4l uv4l-raspicam
 
@@ -27,13 +27,13 @@ RUN apt-get -y upgrade
 
 # RUN apt-get install uv4l-mjpegstream
 
-RUN apt-get install uv4l-webrtc-armv6
+# RUN apt-get install uv4l-webrtc-armv6
 
 # this for rpi2 or 3 (https://www.linux-projects.org/uv4l/installation/)
 # RUN apt-get install uv4l-webrtc
 
 
-RUN apt-get update && apt-get install -yq libraspberrypi-bin
+# RUN apt-get install -yq libraspberrypi-bin
 
 RUN apt-get install pigpio
 
