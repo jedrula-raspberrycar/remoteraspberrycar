@@ -47,12 +47,17 @@ module.exports = function(environment) {
   }
 
   if (environment === 'pi3') {
+    ENV.APP.API_DOMAIN = '192.168.1.204';
+    ENV.APP.CAMERA_PORT = '3080';
+  }
+
+  if (environment === 'pi2') {
     // TODO make this smarter! read qr code and determine dynamicaly ?
     ENV.APP.API_DOMAIN = '192.168.1.201';
     ENV.APP.API_PORT = '3002';
   }
 
-  if (environment === 'pi3-internet') {
+  if (environment === 'pi2-internet') {
     // TODO make this smarter! read qr code and determine dynamicaly ?
     ENV.APP.API_DOMAIN = 'jedrula.ddns.net';
     ENV.APP.API_PORT = '3002';
