@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   didRender() {
-    const signalling_server_hostname =  "192.168.1.204";
+    const signalling_server_hostname =  "192.168.1.202";
     var signalling_server_address = signalling_server_hostname + ':' + '3080';
 
     var ws = null;

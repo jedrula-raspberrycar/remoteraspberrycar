@@ -4,6 +4,8 @@
 # Note the node:slim image doesn't have node-gyp
 FROM resin/%%RESIN_MACHINE_NAME%%-node
 
+# TODO fold RUN cmds to one cmd
+
 RUN curl http://www.linux-projects.org/listing/uv4l_repo/lrkey.asc | apt-key add -
 
 RUN echo "deb http://www.linux-projects.org/listing/uv4l_repo/raspbian/ jessie main" | tee -a /etc/apt/sources.list
@@ -23,6 +25,11 @@ RUN apt-get install uv4l-uvc
 RUN apt-get install uv4l-xscreen
 
 RUN apt-get install uv4l-mjpegstream
+
+RUN apt-get install uv4l-webrtc-armv6
+
+# this for rpi2 or 3 (https://www.linux-projects.org/uv4l/installation/)
+# RUN apt-get install uv4l-webrtc
 
 
 RUN apt-get update && apt-get install -yq libraspberrypi-bin
