@@ -57,41 +57,13 @@
             function createPeerConnection() {
                 try {
                     var pcConfig_ = pcConfig;
-                    try {
-                        ice_servers = document.getElementById('ice_servers').value;
-                        if (ice_servers) {
-                            pcConfig_.iceServers = JSON.parse(ice_servers);
-                        }
-                    } catch (e) {
-                        alert(e + "\nExample: "
-                                + '\n[ {"urls": "stun:stun1.example.net"}, {"urls": "turn:turn.example.org", "username": "user", "credential": "myPassword"} ]'
-                                + "\nContinuing with built-in RTCIceServer array");
-                    }
                     console.log(JSON.stringify(pcConfig_));
                     pc = new RTCPeerConnection(pcConfig_, {});
-                    pc.onicecandidate = onIceCandidate;
                     pc.onaddstream = onRemoteStreamAdded;
                     pc.onremovestream = onRemoteStreamRemoved;
                     console.log("peer connection successfully created!");
                 } catch (e) {
                     console.error("createPeerConnection() failed");
-                }
-            }
-
-            function onIceCandidate(event) {
-                if (event.candidate) {
-                    var candidate = {
-                        sdpMLineIndex: event.candidate.sdpMLineIndex,
-                        sdpMid: event.candidate.sdpMid,
-                        candidate: event.candidate.candidate
-                    };
-                    var request = {
-                        what: "addIceCandidate",
-                        data: JSON.stringify(candidate)
-                    };
-                    ws.send(JSON.stringify(request));
-                } else {
-                    console.log("End of candidates.");
                 }
             }
 
@@ -600,92 +572,6 @@
                 console.log("local data channel closed");
             }
 
-            function handleOrientation(event) {
-                var data = {
-                    "do": {
-                        "alpha": event.alpha.toFixed(1), // In degree in the range [0,360]
-                        "beta": event.beta.toFixed(1), // In degree in the range [-180,180]
-                        "gamma": event.gamma.toFixed(1), // In degree in the range [-90,90]
-                        "absolute": event.absolute
-                    }
-                };
-                if (datachannel)
-                    datachannel.send(JSON.stringify(data));
-            }
-
-            function isGyronormPresent() {
-                var url = "gyronorm.complete.min.js";
-                var scripts = document.getElementsByTagName('script');
-                for (var i = scripts.length; i--; ) {
-                    if (scripts[i].src.indexOf(url) > -1)
-                        return true;
-                }
-                return false;
-            }
-
-            function handleGyronorm(data) {
-                // Process:
-                // data.do.alpha    ( deviceorientation event alpha value )
-                // data.do.beta     ( deviceorientation event beta value )
-                // data.do.gamma    ( deviceorientation event gamma value )
-                // data.do.absolute ( deviceorientation event absolute value )
-
-                // data.dm.x        ( devicemotion event acceleration x value )
-                // data.dm.y        ( devicemotion event acceleration y value )
-                // data.dm.z        ( devicemotion event acceleration z value )
-
-                // data.dm.gx       ( devicemotion event accelerationIncludingGravity x value )
-                // data.dm.gy       ( devicemotion event accelerationIncludingGravity y value )
-                // data.dm.gz       ( devicemotion event accelerationIncludingGravity z value )
-
-                // data.dm.alpha    ( devicemotion event rotationRate alpha value )
-                // data.dm.beta     ( devicemotion event rotationRate beta value )
-                // data.dm.gamma    ( devicemotion event rotationRate gamma value )
-                if (datachannel && document.getElementById('orientationsend').checked)
-                    datachannel.send(JSON.stringify(data));
-            }
-
-            function orientationsend_selection() {
-                if (document.getElementById('orientationsend').checked) {
-                    if (isGyronormPresent()) {
-                        console.log("gyronorm.js library found!");
-                        if (gn) {
-                            gn.setHeadDirection();
-                            return;
-                        }
-                        try {
-                            gn = new GyroNorm();
-                        } catch (e) {
-                            console.log(e);
-                            document.getElementById('orientationsend').checked = false;
-                            return;
-                        }
-                        var args = {
-                            frequency: 60, // ( How often the object sends the values - milliseconds )
-                            gravityNormalized: true, // ( If the gravity related values to be normalized )
-                            orientationBase: GyroNorm.GAME, // ( Can be GyroNorm.GAME or GyroNorm.WORLD. gn.GAME returns orientation values with respect to the head direction of the device. gn.WORLD returns the orientation values with respect to the actual north direction of the world. )
-                            decimalCount: 1, // ( How many digits after the decimal point will there be in the return values )
-                            logger: null, // ( Function to be called to log messages from gyronorm.js )
-                            screenAdjusted: false            // ( If set to true it will return screen adjusted values. )
-                        };
-                        gn.init(args).then(function () {
-                            gn.start(handleGyronorm);
-                            gn.setHeadDirection(); // only with gn.GAME
-                        }).catch(function (e) {
-                            console.log("DeviceOrientation or DeviceMotion might not be supported by this browser or device");
-                        });
-                    }
-                    if (!gn) {
-                        window.addEventListener('deviceorientation', handleOrientation, true);
-                        console.log("gyronorm.js library not found, using defaults");
-                    }
-                } else {
-                    if (!gn) {
-                        window.removeEventListener('deviceorientation', handleOrientation, true);
-                    }
-                }
-            }
-
             function getKeycodesArray(arr) {
                 var newArr = new Array();
                 for (var i = 0; i < arr.length; i++) {
@@ -1065,7 +951,6 @@
                     <span>message: </span><input type="text" id="datamessage" value="" title="message to send to the remote peer"/>
                     <button id="datasend" onclick="send_message();">Send</button>
                     <span>received: </span><input type="text" readonly="readonly" id="datareceived" size="40" title="data received from the remote peer"/><br>
-                    <label><input type="checkbox" onclick="orientationsend_selection();" id="orientationsend" name="orientationsend" title="send device orientation angles when they change">send device orientation angles alpha, beta, gamma</label>
                     <label><input type="checkbox" onclick="keypresssend_selection();" id="keypresssend" name="keypresssend" title="send keyboard events. Assume US layout. For users with virtual keyboard: put the focus on the 'message' input text item.">send key codes (US layout)</label>
                     <label><input type="checkbox" onclick="alert('not implemented yet');" id="mousesend" name="mousesend" title="send mouse events">send mouse events</label>
                 </fieldset>
@@ -1080,7 +965,6 @@
                 <summary><b>Advanced options</b></summary>
                 <fieldset>
                     <span>Remote Peer/Signalling Server Address: </span><input required type="text" id="signalling_server" value="192.168.1.204:8080" title="<host>:<port>, default address is autodetected"/><br>
-                    <span>Optional ICE Servers (STUN/TURN): </span><input type="text" id="ice_servers" value="" title="array of RTCIceServer objects as valid JSON string"/>
                 </fieldset>
             </details>
             <button id="start" style="background-color: green; color: white" onclick="start();">Call!</button>
