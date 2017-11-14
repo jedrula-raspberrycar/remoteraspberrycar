@@ -10,25 +10,6 @@
             var signalling_server_address = signalling_server_hostname + ':' + '3080';
             var isFirefox = typeof InstallTrigger !== 'undefined';// Firefox 1.0+
 
-            addEventListener("DOMContentLoaded", function () {
-                document.getElementById('signalling_server').value = signalling_server_address;
-                var cast_not_allowed = !('MediaSource' in window) || location.protocol !== "https:";
-                if (cast_not_allowed || !isFirefox) { 
-                    if (document.getElementById('cast_tab'))
-                        document.getElementById('cast_tab').disabled = true;
-                    if (cast_not_allowed) { // chrome supports if run with --enable-usermedia-screen-capturing
-                        document.getElementById('cast_screen').disabled = true;
-                    }
-                    document.getElementById('cast_window').disabled = true;
-                    document.getElementById('cast_application').disabled = true;
-                    document.getElementById('note2').style.display = "none";
-                    document.getElementById('note4').style.display = "none";
-                } else {
-                    document.getElementById('note1').style.display = "none";
-                    document.getElementById('note3').style.display = "none";
-                }
-            });
-
             var ws = null;
             var pc;
             var gn;
@@ -127,77 +108,7 @@
                     }
 
                     ws.onopen = function () {
-                        console.log("onopen()");
-
-                        audio_video_stream = null;
-                        var cast_mic = document.getElementById("cast_mic").checked;
-                        var cast_tab = document.getElementById("cast_tab") ? document.getElementById("cast_tab").checked : false;
-                        var cast_camera = document.getElementById("cast_camera").checked;
-                        var cast_screen = document.getElementById("cast_screen").checked;
-                        var cast_window = document.getElementById("cast_window").checked;
-                        var cast_application = document.getElementById("cast_application").checked;
-                        var echo_cancellation = document.getElementById("echo_cancellation").checked;
-                        var localConstraints = {};
-                        if (cast_mic) {
-                            if (echo_cancellation)
-                                localConstraints['audio'] = isFirefox ? {echoCancellation: true} : {optional: [{echoCancellation: true}]};
-                            else
-                                localConstraints['audio'] = isFirefox ? {echoCancellation: false} : {optional: [{echoCancellation: false}]};
-                        } else if (cast_tab) {
-                            localConstraints['audio'] = {mediaSource: "audioCapture"};
-                        } else {
-                            localConstraints['audio'] = false;
-                        }
-                        if (cast_camera) {
-                            localConstraints['video'] = true;
-                        } else if (cast_screen) {
-                            if (isFirefox) {
-                                localConstraints['video'] = {frameRate: {ideal: 15, max: 30},
-                                    //width: {min: 640, max: 960},
-                                    //height: {min: 480, max: 720},
-                                    mozMediaSource: "screen",
-                                    mediaSource: "screen"};
-                            } else {
-                                // chrome://flags#enable-usermedia-screen-capturing
-                                document.getElementById("cast_mic").checked = false;
-                                localConstraints['audio'] = false; // mandatory for chrome
-                                localConstraints['video'] = {'mandatory': {'chromeMediaSource':'screen'}};
-                            }
-                        } else if (cast_window)
-                            localConstraints['video'] = {frameRate: {ideal: 15, max: 30},
-                                //width: {min: 640, max: 960},
-                                //height: {min: 480, max: 720},
-                                mozMediaSource: "window",
-                                mediaSource: "window"};
-                        else if (cast_application)
-                            localConstraints['video'] = {frameRate: {ideal: 15, max: 30},
-                                //width: {min: 640, max: 960},
-                                //height:  {min: 480, max: 720},
-                                mozMediaSource: "application",
-                                mediaSource: "application"};
-                        else
-                            localConstraints['video'] = false;
-
-                        var localVideoElement = document.getElementById('local-video');
-                        if (localConstraints.audio || localConstraints.video) {
-                            if (navigator.getUserMedia) {
-                                navigator.getUserMedia(localConstraints, function (stream) {
-                                    audio_video_stream = stream;
-                                    call(stream);
-                                    localVideoElement.muted = true;
-                                    localVideoElement.src = URL.createObjectURL(stream);
-                                    localVideoElement.play();
-                                }, function (error) {
-                                    stop();
-                                    alert("An error has occurred. Check media device, permissions on media and origin.");
-                                    console.error(error);
-                                });
-                            } else {
-                                console.log("getUserMedia not supported");
-                            }
-                        } else {
-                            call();
-                        }
+                      call();
                     };
 
                     ws.onmessage = function (evt) {
@@ -440,51 +351,7 @@
                 <p class="overlay">local</p>
             </div>
         </div>
-        <div id="controls">
-            <button type=button id="pause" onclick="pause();" title="pause or resume local player">Pause/Resume</button>
-            <button type=button id="mute" onclick="mute();" title="mute or unmute remote audio source">Mute/Unmute</button>
-            <button type=button id="fullscreen" onclick="fullscreen();">Fullscreen</button>
-        </div>
-        <fieldset>
-            <legend><b>Cast local Audio/Video sources to remote peer</b></legend>
-            <div>
-                <span>Audio:</span>
-                <label><input type="checkbox" onclick="singleselection('audio_cast', 'cast_mic');" id="cast_mic" name="audio_cast" value="microphone">microphone/other input</label>
-                <label><input type="checkbox" id="echo_cancellation" name="audio_processing" title="disable any audio processing when casting music" checked>echo cancellation</label>
-                <!--label><input type="checkbox" onclick="singleselection('audio_cast', 'cast_tab');" id="cast_tab" name="audio_cast" value="system">tab</label-->
-            </div>
-            <div>
-                <span>Video:</span>
-                <label><input type="checkbox" onclick="singleselection('video_cast', 'cast_camera');" id="cast_camera" name="video_cast" value="camera">camera</label>
-                <label><input type="checkbox" onclick="singleselection('video_cast', 'cast_screen');" id="cast_screen" name="video_cast" value="screen">screen</label>
-                <label><input type="checkbox" onclick="singleselection('video_cast', 'cast_window');" id="cast_window" name="video_cast" value="screen">window</label>
-                <label><input type="checkbox" onclick="singleselection('video_cast', 'cast_application');" id="cast_application" name="video_cast" value="application">application</label>
-                <p id="note1"><small>NOTE: camera and screen can be casted over HTTPS only in Chrome. For the screen the --enable-usermedia-screen-capturing flag must be set. window or application casting is only supported in Firefox 44 on.</small></p>
-                <p id="note2"><small>NOTE: except for camera, to enable screen, window or application casting open <i>about:config</i> URL
-                        and set <i>media.getusermedia.screensharing.enabled</i> to <i>true</i>
-                        and permanently add the current domain to the list in <i>media.getusermedia.screensharing.allowed_domains.</i></small>
-                </p>
-                <p id="note3"><small>NOTE: if you want to cast music, for better audio quality disable <i>echo-cancellation.</i></small></p>
-                <p id="note4"><small>NOTE: if you want to cast music, for better audio quality disable <i>echo-cancellation</i>,
-                        and <i>aec</i>, <i>noise-suppression</i>, <i>agc</i> in the browser configuration <i>(about:config).</i></small>
-                </p>
-            </div>
-        </fieldset>
-        <div>
-            <details>
-                <summary><b>Data Channels</b></summary>
-                <fieldset id="datachannels" disabled>
-                    <span>message: </span><input type="text" id="datamessage" value="" title="message to send to the remote peer"/>
-                    <button id="datasend" onclick="send_message();">Send</button>
-                    <span>received: </span><input type="text" readonly="readonly" id="datareceived" size="40" title="data received from the remote peer"/><br>
-                    <label><input type="checkbox" onclick="alert('not implemented yet');" id="mousesend" name="mousesend" title="send mouse events">send mouse events</label>
-                </fieldset>
-                <!--fieldset id="localdatachannels">
-                    <button id="datacreate" onclick="create_localdatachannel();">Create</button>
-                    <button id="dataclose" onclick="close_localdatachannel();">Close</button>
-                </fieldset-->
-            </details>
-        </div><br>
+        
         <div id="commands">
             <details open>
                 <summary><b>Advanced options</b></summary>
