@@ -2,11 +2,11 @@
 # see more about dockerfile templates here: http://docs.resin.io/deployment/docker-templates/
 # and about resin base images here: http://docs.resin.io/runtime/resin-base-images/
 # Note the node:slim image doesn't have node-gyp
-FROM arm32v7/node
+FROM arm32v7/node:latest
 
-RUN curl http://www.linux-projects.org/listing/uv4l_repo/lpkey.asc | sudo apt-key add -
+# RUN curl http://www.linux-projects.org/listing/uv4l_repo/lpkey.asc | apt-key add -
 
-RUN echo "deb http://www.linux-projects.org/listing/uv4l_repo/raspbian/stretch stretch main" | tee -a /etc/apt/sources.list
+# RUN echo "deb http://www.linux-projects.org/listing/uv4l_repo/raspbian/stretch stretch main" | tee -a /etc/apt/sources.list
 
 RUN apt-get update
 
