@@ -2,7 +2,7 @@
 # see more about dockerfile templates here: http://docs.resin.io/deployment/docker-templates/
 # and about resin base images here: http://docs.resin.io/runtime/resin-base-images/
 # Note the node:slim image doesn't have node-gyp
-FROM arm32v7/node:8.9.1-stretch
+FROM resin/raspberrypi3-node
 
 # TODO fold RUN cmds to one cmd
 
