@@ -1,5 +1,10 @@
 const fetch = require('node-fetch');
 const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+const waitRandom = (from, to) => {
+  const ms = from + parseInt(Math.random() * (to - from), 10);
+  console.log('lets wait for ', ms);
+  return wait(ms)
+};
 
 async function triggerCarPatchRequest(API_HOST, ...pulseModulations) {
   const body = JSON.stringify({ pulseModulations });
@@ -21,11 +26,11 @@ async function triggerCarPatchRequest(API_HOST, ...pulseModulations) {
 async function main() {
   while (true) {
    await triggerCarPatchRequest('http://192.168.1.204', 0, 0, 0, 0);
-   await wait(500);
+   await waitRandom(1000, 2000);
    await triggerCarPatchRequest('http://192.168.1.204', 0.4, 0, 0, 0);
    await wait(500);
    await triggerCarPatchRequest('http://192.168.1.204', 0, 0, 0, 0);
-   await wait(500);
+   await waitRandom(1000, 2000);
    await triggerCarPatchRequest('http://192.168.1.204', 0, 0.4, 0, 0);
    await wait(500);
   }
