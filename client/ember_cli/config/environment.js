@@ -48,6 +48,7 @@ module.exports = function(environment) {
 
   if (environment === 'pi3') {
     ENV.APP.API_DOMAIN = '192.168.1.204';
+    ENV.APP.API_PORT = '80';
     ENV.APP.CAMERA_PORT = '3080';
   }
 
